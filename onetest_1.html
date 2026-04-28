@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Тест: Кибербуллинг. Вопрос 1</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.5;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.back-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.back-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.back-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.question-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.question-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.question-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.test-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.block-title {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.block-description {
+				font-size: 1.1rem;
+				color: #d0d0d0;
+				margin-bottom: 1.5rem;
+			}
+
+			.block-status {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				margin-bottom: 1.5rem;
+				padding: 0.5rem 1rem;
+				background-color: #2f2f2f;
+				border-radius: 12px;
+				border: 1px solid #5a5a5a;
+			}
+
+			.status-text {
+				font-size: 1rem;
+				font-weight: 500;
+				color: #d0d0d0;
+			}
+
+			.options-group {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.option-item {
+				display: flex;
+				align-items: flex-start;
+				gap: 1rem;
+				background-color: #2f2f2f;
+				padding: 1rem 1.5rem;
+				border-radius: 16px;
+				border: 2px solid #5a5a5a;
+				cursor: pointer;
+				position: relative;
+				transition: none;
+			}
+
+			.option-item.disabled {
+				pointer-events: none;
+				opacity: 0.9;
+			}
+
+			.option-item.correct-selected {
+				background-color: #1e4a2e;
+				border-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected {
+				background-color: #4a1e1e;
+				border-color: #e74c3c;
+			}
+
+			.option-item input[type='radio'],
+			.option-item input[type='checkbox'] {
+				appearance: none;
+				-webkit-appearance: none;
+				width: 1.5rem;
+				height: 1.5rem;
+				border: 2px solid #888;
+				border-radius: 50%;
+				background-color: #2f2f2f;
+				cursor: pointer;
+				position: relative;
+				transition: all 0.2s;
+				flex-shrink: 0;
+				pointer-events: none;
+			}
+
+			.option-item input[type='checkbox'] {
+				border-radius: 6px;
+			}
+
+			.option-item input[type='radio']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+				box-shadow: inset 0 0 0 4px #2f2f2f;
+			}
+
+			.option-item input[type='checkbox']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+			}
+
+			.option-item input[type='checkbox']:checked::after {
+				content: '✓';
+				color: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 1rem;
+				font-weight: bold;
+			}
+
+			.option-item.correct-selected input[type='radio'],
+			.option-item.correct-selected input[type='checkbox'] {
+				border-color: #2ecc71;
+				background-color: #2ecc71;
+			}
+
+			.option-item.correct-selected input[type='radio']:checked {
+				box-shadow: inset 0 0 0 4px #1e4a2e;
+			}
+
+			.option-item.incorrect-selected input[type='radio'],
+			.option-item.incorrect-selected input[type='checkbox'] {
+				border-color: #e74c3c;
+				background-color: #e74c3c;
+			}
+
+			.option-item.incorrect-selected input[type='radio']:checked {
+				box-shadow: inset 0 0 0 4px #4a1e1e;
+			}
+
+			.option-text {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+				line-height: 1.4;
+				flex: 1;
+			}
+
+			.option-badge {
+				font-size: 0.9rem;
+				font-weight: 600;
+				padding: 0.3rem 1rem;
+				border-radius: 40px;
+				white-space: nowrap;
+				background-color: transparent;
+			}
+
+			.option-item.correct-selected .option-badge {
+				background-color: #2ecc71;
+				color: #000;
+			}
+
+			.option-item.incorrect-selected .option-badge {
+				background-color: #e74c3c;
+				color: #fff;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: flex-end;
+				margin-top: 2rem;
+			}
+
+			.next-btn {
+				display: inline-block;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 600;
+				padding: 0.9rem 2.5rem;
+				border-radius: 60px;
+				font-size: 1.2rem;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s;
+			}
+
+			.next-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.next-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			.footer {
+				background-color: #000000;
+				color: #dddddd;
+				padding: 1.8rem 1rem;
+				margin-top: 2rem;
+				text-align: center;
+				border-top: 2px solid #1f1f1f;
+				width: 100vw;
+				margin-left: calc(-50vw + 50%);
+				flex-shrink: 0;
+			}
+
+			.footer__text {
+				font-size: 1.8rem;
+				font-weight: 400;
+				letter-spacing: 3px;
+				color: #f5f5f5;
+				text-transform: uppercase;
+				opacity: 0.9;
+			}
+
+			@media (max-width: 700px) {
+				.footer__text {
+					font-size: 1.4rem;
+				}
+			}
+			@media (max-width: 700px) {
+				.question-title {
+					font-size: 1.8rem;
+				}
+				.test-block {
+					padding: 1.5rem;
+				}
+				.option-item {
+					flex-wrap: wrap;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.next-btn {
+					width: 100%;
+					text-align: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="onetest.html" class="back-button">Назад</a>
+
+			<div class="question-header">
+				<h1 class="question-title">Что такое кибербуллинг?</h1>
+				<div class="question-subtitle">
+					Проверьте свои знания о безопасном общении в сети
+				</div>
+			</div>
+
+			<div class="test-block" id="block1">
+				<h2 class="block-title">Выберите верное утверждение:</h2>
+
+				<div class="block-status" id="block1Status">
+					<span class="status-text" id="block1StatusText">Блок не пройден</span>
+				</div>
+
+				<div class="options-group" id="radioGroup">
+					<label class="option-item" data-correct="false" data-index="0">
+						<input type="radio" name="radioQuestion" />
+						<span class="option-text"
+							>Только в реальном мире человеку нужны бдительность, критичность
+							мышления и уважение к собеседникам</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="false" data-index="1">
+						<input type="radio" name="radioQuestion" />
+						<span class="option-text"
+							>Только в виртуальном мире человеку нужны бдительность,
+							критичность мышления и уважение к собеседникам</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="true" data-index="2">
+						<input type="radio" name="radioQuestion" />
+						<span class="option-text"
+							>В виртуальном мире, как и в реальном, человеку нужны
+							бдительность, критичность мышления и уважение к собеседникам</span
+						>
+						<span class="option-badge"></span>
+					</label>
+				</div>
+			</div>
+
+			<div class="test-block" id="block2">
+				<h2 class="block-title">Укажите, что является кибербуллингом.</h2>
+				<p class="block-description">Выберите все подходящие ответы:</p>
+
+				<div class="block-status" id="block2Status">
+					<span class="status-text" id="block2StatusText">Блок не пройден</span>
+				</div>
+
+				<div class="options-group" id="checkboxGroup">
+					<label class="option-item" data-correct="true" data-index="0">
+						<input type="checkbox" />
+						<span class="option-text"
+							>Постоянные оскорбления, угрозы, негативные комментарии</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="false" data-index="1">
+						<input type="checkbox" />
+						<span class="option-text"
+							>Комментарий, противоречащий точке зрения другого
+							пользователя</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="false" data-index="2">
+						<input type="checkbox" />
+						<span class="option-text"
+							>Публикация одноклассниками совместных фотографий без разрешения
+							одного из них</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="true" data-index="3">
+						<input type="checkbox" />
+						<span class="option-text"
+							>Публикация личной информации о человеке вопреки его желаниям с
+							целью его унизить</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="true" data-index="4">
+						<input type="checkbox" />
+						<span class="option-text"
+							>Преднамеренное игнорирование — байкотирование</span
+						>
+						<span class="option-badge"></span>
+					</label>
+				</div>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="onetest_2.html" class="next-btn next">Следующий вопрос</a>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const radioItems = document.querySelectorAll('#radioGroup .option-item')
+				const block1StatusText = document.getElementById('block1StatusText')
+
+				let block1State = {
+					status: 'not_started',
+					hasError: false,
+					correctSelected: false,
+					isBlocked: false,
+				}
+
+				function updateBlock1Status() {
+					if (block1State.status === 'not_started') {
+						block1StatusText.textContent = 'Блок не пройден'
+					} else if (block1State.status === 'in_progress') {
+						block1StatusText.textContent = 'Блок в процессе прохождения'
+					} else if (block1State.status === 'completed_with_errors') {
+						block1StatusText.textContent = 'Блок пройден с ошибками'
+					} else if (block1State.status === 'completed_success') {
+						block1StatusText.textContent = 'Блок пройден верно'
+					}
+				}
+
+				function block1AllOptions() {
+					radioItems.forEach(item => {
+						item.classList.add('disabled')
+						const radio = item.querySelector('input[type="radio"]')
+						radio.disabled = true
+					})
+					block1State.isBlocked = true
+				}
+
+				function handleBlock1Click(clickedItem) {
+					if (block1State.isBlocked) return
+
+					const isCorrect = clickedItem.dataset.correct === 'true'
+					const radio = clickedItem.querySelector('input[type="radio"]')
+
+					radio.checked = true
+					const badge = clickedItem.querySelector('.option-badge')
+
+					if (isCorrect) {
+						clickedItem.classList.add('correct-selected')
+						clickedItem.classList.remove('incorrect-selected')
+						badge.textContent = 'Правильный ответ'
+
+						if (block1State.hasError) {
+							block1State.status = 'completed_with_errors'
+						} else {
+							block1State.status = 'completed_success'
+						}
+
+						block1AllOptions()
+					} else {
+						clickedItem.classList.add('incorrect-selected')
+						clickedItem.classList.remove('correct-selected')
+						badge.textContent = 'Неправильный ответ'
+
+						block1State.hasError = true
+
+						if (!block1State.correctSelected) {
+							block1State.status = 'in_progress'
+						}
+					}
+
+					updateBlock1Status()
+				}
+
+				radioItems.forEach(item => {
+					const radio = item.querySelector('input[type="radio"]')
+
+					item.addEventListener('click', function (e) {
+						if (e.target.tagName !== 'INPUT') {
+							radio.checked = true
+							handleBlock1Click(this)
+						}
+					})
+
+					radio.addEventListener('change', function () {
+						handleBlock1Click(this.closest('.option-item'))
+					})
+				})
+
+				const checkItems = document.querySelectorAll(
+					'#checkboxGroup .option-item',
+				)
+				const block2StatusText = document.getElementById('block2StatusText')
+
+				let block2State = {
+					status: 'not_started',
+					correctIndices: [0, 3, 4],
+					selectedIndices: [],
+					isBlocked: false,
+				}
+
+				function updateBlock2Status() {
+					if (block2State.selectedIndices.length === 0) {
+						block2State.status = 'not_started'
+						block2StatusText.textContent = 'Блок не пройден'
+						return
+					}
+
+					let allCorrectSelected = true
+					block2State.correctIndices.forEach(correctIdx => {
+						if (!block2State.selectedIndices.includes(correctIdx)) {
+							allCorrectSelected = false
+						}
+					})
+
+					let hasErrors = false
+					block2State.selectedIndices.forEach(idx => {
+						if (!block2State.correctIndices.includes(idx)) {
+							hasErrors = true
+						}
+					})
+
+					if (allCorrectSelected) {
+						if (hasErrors) {
+							block2State.status = 'completed_with_errors'
+							block2StatusText.textContent = 'Блок пройден с ошибками'
+						} else {
+							block2State.status = 'completed_success'
+							block2StatusText.textContent = 'Блок пройден верно'
+						}
+
+						block2AllOptions()
+					} else {
+						block2State.status = 'in_progress'
+						block2StatusText.textContent = 'Блок в процессе прохождения'
+					}
+				}
+
+				function block2AllOptions() {
+					checkItems.forEach(item => {
+						item.classList.add('disabled')
+						const checkbox = item.querySelector('input[type="checkbox"]')
+						checkbox.disabled = true
+					})
+					block2State.isBlocked = true
+				}
+
+				function handleBlock2Click(clickedItem) {
+					if (block2State.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+					const isCorrect = clickedItem.dataset.correct === 'true'
+					const checkbox = clickedItem.querySelector('input[type="checkbox"]')
+					const badge = clickedItem.querySelector('.option-badge')
+
+					if (checkbox.checked) {
+						return
+					}
+
+					checkbox.checked = true
+
+					if (!block2State.selectedIndices.includes(clickedIndex)) {
+						block2State.selectedIndices.push(clickedIndex)
+					}
+
+					if (isCorrect) {
+						clickedItem.classList.add('correct-selected')
+						clickedItem.classList.remove('incorrect-selected')
+						badge.textContent = 'Правильный ответ'
+					} else {
+						clickedItem.classList.add('incorrect-selected')
+						clickedItem.classList.remove('correct-selected')
+						badge.textContent = 'Неправильный ответ'
+					}
+
+					updateBlock2Status()
+				}
+
+				checkItems.forEach(item => {
+					item.addEventListener('click', function (e) {
+						handleBlock2Click(this)
+					})
+				})
+
+				updateBlock1Status()
+				updateBlock2Status()
+			})
+		</script>
+	</body>
+</html>

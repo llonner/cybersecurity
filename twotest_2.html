@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Типы вредоносных программ</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.6;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.home-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.home-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.home-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.page-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.page-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.page-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.content-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.content-title {
+				font-size: 2rem;
+				font-weight: 700;
+				color: #ffffff;
+				margin-bottom: 2rem;
+				text-align: center;
+			}
+
+			.section-title {
+				font-size: 1.8rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.subsection-title {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #9b59b6;
+				margin: 2rem 0 1rem 0;
+			}
+
+			.malware-types {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+			}
+
+			.malware-item {
+				background-color: #2f2f2f;
+				border-radius: 16px;
+				padding: 1.5rem;
+				border-left: 4px solid #9b59b6;
+			}
+
+			.malware-name {
+				font-size: 1.4rem;
+				font-weight: 700;
+				color: #9b59b6;
+				margin-bottom: 0.8rem;
+			}
+
+			.malware-desc {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+				line-height: 1.7;
+			}
+
+			.fake-antivirus-container {
+				background-color: #2f2f2f;
+				border-radius: 16px;
+				padding: 1.5rem;
+				border-left: 4px solid #9b59b6;
+			}
+
+			.fake-antivirus-title {
+				font-size: 1.4rem;
+				font-weight: 700;
+				color: #9b59b6;
+				margin-bottom: 0.8rem;
+			}
+
+			.fake-antivirus-desc {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+				margin-bottom: 1rem;
+				line-height: 1.7;
+			}
+
+			.fake-antivirus-message {
+				background-color: #3a3a3a;
+				border: 1px solid #e74c3c;
+				border-radius: 12px;
+				padding: 1rem;
+				margin-top: 1rem;
+				text-align: center;
+			}
+
+			.fake-antivirus-message-title {
+				font-size: 1.3rem;
+				font-weight: 700;
+				color: #e74c3c;
+				margin-bottom: 0.3rem;
+			}
+
+			.fake-antivirus-message-text {
+				font-size: 1rem;
+				color: #d0d0d0;
+				margin-bottom: 0.8rem;
+			}
+
+			.fake-antivirus-message-btn {
+				background-color: #e74c3c;
+				color: white;
+				border: none;
+				padding: 0.4rem 1.2rem;
+				border-radius: 30px;
+				font-size: 0.9rem;
+				font-weight: 600;
+				cursor: pointer;
+				border: 1px solid #c0392b;
+			}
+
+			.exercise-section {
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 2px solid #4f4f4f;
+			}
+
+			.exercise-title {
+				font-size: 1.8rem;
+				font-weight: 600;
+				color: #9b59b6;
+				margin-bottom: 1.5rem;
+				text-align: center;
+			}
+
+			.exercise-description {
+				font-size: 1.2rem;
+				color: #d0d0d0;
+				margin-bottom: 2rem;
+				text-align: center;
+			}
+
+			.game-container {
+				display: block;
+				margin-top: 2rem;
+			}
+
+			.game-grid {
+				display: flex;
+				gap: 2rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.column {
+				flex: 1;
+				min-width: 280px;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.column-title {
+				font-size: 1.3rem;
+				font-weight: 600;
+				color: #9b59b6;
+				margin-bottom: 0.5rem;
+				text-align: center;
+			}
+
+			.game-card {
+				background-color: #2f2f2f;
+				border: 2px solid #5a5a5a;
+				border-radius: 16px;
+				padding: 1.2rem;
+				cursor: pointer;
+				transition: all 0.2s;
+				user-select: none;
+				text-align: center;
+				font-size: 1rem;
+				min-height: 100px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1.6;
+			}
+
+			.game-card:hover {
+				border-color: #9b59b6;
+				transform: translateY(-2px);
+			}
+
+			.game-card.selected {
+				border-color: #9b59b6;
+				background-color: #3a3a3a;
+				box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+			}
+
+			.game-card.matched {
+				border-color: #2ecc71;
+				background-color: #1e4a2e;
+			}
+
+			.game-card.correct-match {
+				background-color: #1e4a2e;
+				border-color: #2ecc71;
+				transition: background-color 0.2s;
+			}
+
+			.game-card.incorrect-match {
+				background-color: #4a1e1e;
+				border-color: #e74c3c;
+				transition: background-color 0.2s;
+			}
+
+			.success-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.5);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+			}
+
+			.success-content {
+				background-color: #3c3c3c;
+				border-radius: 20px;
+				padding: 2rem;
+				max-width: 400px;
+				width: 90%;
+				border: 2px solid #2ecc71;
+				text-align: center;
+			}
+
+			.success-content h3 {
+				font-size: 1.8rem;
+				color: #2ecc71;
+				margin-bottom: 1rem;
+			}
+
+			.success-content p {
+				font-size: 1.2rem;
+				color: #ffffff;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.8rem 2rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1.1rem;
+			}
+
+			.nav-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.nav-btn.prev::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-right: 0.5rem;
+			}
+
+			.nav-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			@media (max-width: 700px) {
+				.page-title {
+					font-size: 1.8rem;
+				}
+				.content-block {
+					padding: 1.8rem;
+				}
+				.content-title {
+					font-size: 1.8rem;
+				}
+				.section-title {
+					font-size: 1.5rem;
+				}
+				.game-grid {
+					flex-direction: column;
+				}
+				.bottom-nav {
+					flex-direction: column;
+				}
+				.nav-btn {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="twotest.html" class="home-button">Назад</a>
+
+			<div class="page-header">
+				<h1 class="page-title">Типы вредоносных программ</h1>
+				<div class="page-subtitle">Изучаем основные виды вредоносного ПО</div>
+			</div>
+
+			<div class="content-block">
+				<div class="section-title">
+					Наиболее распространенные типы вредоносных программ:
+				</div>
+
+				<div class="malware-types">
+					<div class="malware-item">
+						<div class="malware-name">Вирусы</div>
+						<div class="malware-desc">
+							Обычно распространяются в виде вложений электронной почты (как
+							исполняемые файлы "exe").
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Ботнет</div>
+						<div class="malware-desc">
+							Это сеть зараженных устройств, на каждом из которых работает один
+							или несколько ботов, действия которых координируются для
+							выполнения какой-либо единой задачи. Ботнеты могут использоваться
+							для проведения распределенной атаки отказа в обслуживании (DDoS),
+							кражи данных, рассылки спама и получения злоумышленником доступа к
+							устройству.
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Беспайловые вредоносные программы</div>
+						<div class="malware-desc">
+							Используют для заражения устройства подлинные надежные программы,
+							не оставляя вредоносных процессов и не занимая места, что
+							затрудняет их обнаружение и удаление.
+						</div>
+					</div>
+
+					<div class="fake-antivirus-container">
+						<div class="fake-antivirus-title">Поддельные антивирусы</div>
+						<div class="fake-antivirus-desc">
+							Пугающее сообщение в Интернете (см. рис.).
+						</div>
+						<div class="fake-antivirus-message">
+							<div class="fake-antivirus-message-title">НАЙДЕН ВИРУС</div>
+							<div class="fake-antivirus-message-text">
+								Внимание! Ваш компьютер заражен вирусом. Купите нашу программу,
+								чтобы спасти свои файлы!
+							</div>
+							<button class="fake-antivirus-message-btn">Купить</button>
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Черви</div>
+						<div class="malware-desc">
+							Находят прорехи и уязвимости в программах и копируют себя с одного
+							устройства на другое без вмешательства пользователя, в результате
+							чего заражается целая сеть.
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Шпионские программы</div>
+						<div class="malware-desc">
+							Предназначены для того, чтобы шпионить за пользователем:
+							записывать и передавать всё, что он делает в Интернете, включая
+							сведения о кредитных картах, паролях, часто посещаемых сайтах в
+							Интернете и т. д.
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Трояны</div>
+						<div class="malware-desc">
+							Притворяются безобидными приложениями. После установки они создают
+							бреши в системе безопасности, обеспечивая возможность заражения
+							другими вредоносными программами. Они могут также заниматься
+							кражей личных данных, шпионить за пользователями и наносить вред
+							устройствам.
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Рекламные программы</div>
+						<div class="malware-desc">
+							Они часто устанавливаются в обмен на право бесплатного
+							использования какой-нибудь программы либо маскируются под
+							подлинную программу или прилагаются в нагрузку к другой программе,
+							чтобы обманом побудить пользователя установить ее на своем
+							устройстве. Они показывают нежелательную рекламу, которая обычно
+							появляется, когда ты путешествуешь по Интернету. Реклама
+							раздражает пользователя, прерывая его работу, и даже вмешивается в
+							его действия. Пользователь не сможет закрыть такую рекламу — она
+							снова неизменно появляется на экране. Некоторые из рекламных
+							программ отслеживают ваши действия в Интернете, чтобы
+							таргетировать для вас определенную рекламу.
+						</div>
+					</div>
+
+					<div class="malware-item">
+						<div class="malware-name">Вымогатели</div>
+						<div class="malware-desc">
+							Устанавливают себя на устройство жертвы, зашифровывают файлы и,
+							угрожая их удалением, требуют выкупа.
+						</div>
+					</div>
+				</div>
+
+				<div class="exercise-section">
+					<div class="exercise-title">
+						Проверь что ты знаешь о типах вредоносных программ
+					</div>
+					<div class="exercise-description">
+						Выполни упражнение, чтобы закрепить знания
+					</div>
+
+					<div id="game-container"></div>
+				</div>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="twotest_1.html" class="nav-btn prev">Предыдущая страница</a>
+				<a href="twotest_3.html" class="nav-btn next">Следующая страница</a>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const gameContainer = document.getElementById('game-container')
+
+				const pairs = [
+					{
+						id: 1,
+						type: 'Вирусы',
+						description:
+							'Обычно распространяется в виде вложений электронной почты.',
+					},
+					{
+						id: 2,
+						type: 'Троян',
+						description:
+							'Притворяется безобидным приложением, а после установки создаёт бреши в системе безопасности.',
+					},
+					{
+						id: 3,
+						type: 'Ботнет',
+						description:
+							'Сеть заражённых устройств, на каждом из которых работает один или несколько ботов, действия которых координируются для выполнения какой-либо единой задачи.',
+					},
+					{
+						id: 4,
+						type: 'Рекламная программа',
+						description:
+							'Устанавливается в обмен на право бесплатного использования какой-нибудь программы или прилагается в нагрузку к другой программе, чтобы обманом побудить пользователя установить её на своём устройстве.',
+					},
+					{
+						id: 5,
+						type: 'Вымогатель',
+						description:
+							'Устанавливает себя на устройство жертвы, зашифровывает файлы и, угрожая их удалением, требует выкупа.',
+					},
+				]
+
+				let gameState = {
+					types: [],
+					descriptions: [],
+					selectedType: null,
+					selectedDesc: null,
+					matchedPairs: [],
+					wrongFlash: null,
+				}
+
+				function initGame() {
+					gameState.types = pairs.map(p => ({
+						id: p.id,
+						text: p.type,
+						matched: false,
+					}))
+					gameState.descriptions = pairs.map(p => ({
+						id: p.id,
+						text: p.description,
+						matched: false,
+					}))
+					gameState.selectedType = null
+					gameState.selectedDesc = null
+					gameState.matchedPairs = []
+					gameState.wrongFlash = null
+
+					gameState.types = shuffleArray(gameState.types)
+					gameState.descriptions = shuffleArray(gameState.descriptions)
+				}
+
+				function shuffleArray(array) {
+					for (let i = array.length - 1; i > 0; i--) {
+						const j = Math.floor(Math.random() * (i + 1))
+						;[array[i], array[j]] = [array[j], array[i]]
+					}
+					return array
+				}
+
+				function renderGame() {
+					gameContainer.innerHTML = `
+                    <div class="game-container">
+                        <div class="game-grid">
+                            <div class="column">
+                                <div class="column-title">Типы программ</div>
+                                <div id="types-column">
+                                    ${gameState.types
+																			.map(
+																				t => `
+                                        <div class="game-card ${t.matched ? 'matched' : ''} ${gameState.selectedType === t.id ? 'selected' : ''}" 
+                                             data-type-id="${t.id}">
+                                            ${t.text}
+                                        </div>
+                                    `,
+																			)
+																			.join('')}
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="column-title">Описания</div>
+                                <div id="descriptions-column">
+                                    ${gameState.descriptions
+																			.map(
+																				d => `
+                                        <div class="game-card ${d.matched ? 'matched' : ''} ${gameState.selectedDesc === d.id ? 'selected' : ''}" 
+                                             data-desc-id="${d.id}">
+                                            ${d.text}
+                                        </div>
+                                    `,
+																			)
+																			.join('')}
+                                </div>
+                            </div>
+                        </div>
+                        ${
+													gameState.wrongFlash
+														? `
+                            <div class="game-card incorrect-match" style="margin-top: 1rem; text-align: center; padding: 1rem;">
+                                Неправильная пара!
+                            </div>
+                        `
+														: ''
+												}
+                    </div>
+                `
+
+					document.querySelectorAll('[data-type-id]').forEach(card => {
+						card.addEventListener('click', () =>
+							handleTypeClick(parseInt(card.dataset.typeId)),
+						)
+					})
+
+					document.querySelectorAll('[data-desc-id]').forEach(card => {
+						card.addEventListener('click', () =>
+							handleDescClick(parseInt(card.dataset.descId)),
+						)
+					})
+
+					if (gameState.matchedPairs.length === pairs.length) {
+						showSuccessMessage()
+					}
+				}
+
+				function handleTypeClick(typeId) {
+					if (gameState.types.find(t => t.id === typeId).matched) return
+
+					if (gameState.wrongFlash) {
+						gameState.wrongFlash = null
+					}
+
+					if (gameState.selectedType === typeId) {
+						gameState.selectedType = null
+					} else {
+						gameState.selectedType = typeId
+					}
+
+					if (gameState.selectedType && gameState.selectedDesc) {
+						checkPair()
+					} else {
+						renderGame()
+					}
+				}
+
+				function handleDescClick(descId) {
+					if (gameState.descriptions.find(d => d.id === descId).matched) return
+
+					if (gameState.wrongFlash) {
+						gameState.wrongFlash = null
+					}
+
+					if (gameState.selectedDesc === descId) {
+						gameState.selectedDesc = null
+					} else {
+						gameState.selectedDesc = descId
+					}
+
+					if (gameState.selectedType && gameState.selectedDesc) {
+						checkPair()
+					} else {
+						renderGame()
+					}
+				}
+
+				function checkPair() {
+					const type = gameState.types.find(
+						t => t.id === gameState.selectedType,
+					)
+					const desc = gameState.descriptions.find(
+						d => d.id === gameState.selectedDesc,
+					)
+
+					if (type.id === desc.id) {
+						type.matched = true
+						desc.matched = true
+						gameState.matchedPairs.push(type.id)
+
+						const typeCard = document.querySelector(
+							`[data-type-id="${type.id}"]`,
+						)
+						const descCard = document.querySelector(
+							`[data-desc-id="${desc.id}"]`,
+						)
+
+						if (typeCard && descCard) {
+							typeCard.classList.add('correct-match')
+							descCard.classList.add('correct-match')
+						}
+
+						gameState.selectedType = null
+						gameState.selectedDesc = null
+
+						setTimeout(() => {
+							renderGame()
+						}, 300)
+					} else {
+						gameState.wrongFlash = true
+
+						const typeCard = document.querySelector(
+							`[data-type-id="${type.id}"]`,
+						)
+						const descCard = document.querySelector(
+							`[data-desc-id="${desc.id}"]`,
+						)
+
+						if (typeCard && descCard) {
+							typeCard.classList.add('incorrect-match')
+							descCard.classList.add('incorrect-match')
+
+							setTimeout(() => {
+								typeCard.classList.remove('incorrect-match')
+								descCard.classList.remove('incorrect-match')
+								gameState.selectedType = null
+								gameState.selectedDesc = null
+								gameState.wrongFlash = null
+								renderGame()
+							}, 800)
+						} else {
+							gameState.selectedType = null
+							gameState.selectedDesc = null
+							gameState.wrongFlash = null
+							renderGame()
+						}
+					}
+				}
+
+				function showSuccessMessage() {
+					const successOverlay = document.createElement('div')
+					successOverlay.className = 'success-overlay'
+					successOverlay.innerHTML = `
+                    <div class="success-content">
+                        <h3>🎉 Молодец!</h3>
+                        <p>Все пары составлены правильно!</p>
+                    </div>
+                `
+
+					document.body.appendChild(successOverlay)
+
+					setTimeout(() => {
+						successOverlay.remove()
+					}, 2000)
+
+					successOverlay.addEventListener('click', function (e) {
+						if (e.target === successOverlay) {
+							successOverlay.remove()
+						}
+					})
+				}
+
+				initGame()
+				renderGame()
+			})
+		</script>
+	</body>
+</html>

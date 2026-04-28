@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Как защитить себя от фишинга</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.6;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.home-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.home-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.home-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.page-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.page-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.page-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.content-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.content-title {
+				font-size: 2rem;
+				font-weight: 700;
+				color: #ffffff;
+				margin-bottom: 2rem;
+				text-align: center;
+			}
+
+			.tips-list {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				margin: 2rem 0;
+			}
+
+			.tip-item {
+				background-color: #2f2f2f;
+				border-radius: 16px;
+				padding: 1.5rem;
+				border-left: 4px solid #9b59b6;
+			}
+
+			.tip-number {
+				font-size: 1.3rem;
+				font-weight: 700;
+				color: #9b59b6;
+				margin-bottom: 0.8rem;
+			}
+
+			.tip-title {
+				font-size: 1.3rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1rem;
+			}
+
+			.tip-content {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+			}
+
+			.tip-content p {
+				margin-bottom: 0.8rem;
+			}
+
+			.tip-content ul {
+				list-style: none;
+				margin-top: 0.5rem;
+			}
+
+			.tip-content li {
+				margin-bottom: 0.5rem;
+				padding-left: 1.5rem;
+				position: relative;
+			}
+
+			.tip-content li::before {
+				content: '•';
+				position: absolute;
+				left: 0;
+				color: #9b59b6;
+				font-size: 1.2rem;
+			}
+
+			.highlight {
+				color: #9b59b6;
+				font-weight: 600;
+			}
+
+			.gray-divider {
+				height: 2px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					#9b59b6,
+					#9b59b6,
+					transparent
+				);
+				margin: 2.5rem 0;
+				opacity: 0.5;
+			}
+
+			.test-intro {
+				background-color: #2f2f2f;
+				border-radius: 16px;
+				padding: 2rem;
+				margin: 2rem 0;
+				text-align: center;
+				border: 1px solid #9b59b6;
+			}
+
+			.test-intro p {
+				font-size: 1.3rem;
+				color: #ffffff;
+				margin-bottom: 1rem;
+			}
+
+			.test-intro .highlight {
+				font-size: 1.4rem;
+			}
+
+			.exercise-block {
+				background-color: #2f2f2f;
+				border-radius: 24px;
+				padding: 2rem;
+				margin: 2rem 0;
+				border: 1px solid #5a5a5a;
+			}
+
+			.exercise-title {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				text-align: center;
+			}
+
+			.sites-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1rem;
+				justify-content: center;
+				margin: 2rem 0;
+				min-height: 100px;
+				padding: 1rem;
+				background-color: #3c3c3c;
+				border-radius: 16px;
+				border: 2px dashed #5a5a5a;
+			}
+
+			.site-card {
+				background-color: #4f4f4f;
+				border: 2px solid #9b59b6;
+				border-radius: 40px;
+				padding: 0.8rem 1.5rem;
+				font-size: 1rem;
+				color: #ffffff;
+				cursor: grab;
+				user-select: none;
+				display: inline-block;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+				transition: all 0.2s;
+			}
+
+			.site-card:active {
+				cursor: grabbing;
+				opacity: 0.8;
+			}
+
+			.site-card.dragging {
+				opacity: 0.5;
+				transform: scale(0.95);
+			}
+
+			.site-card.disabled {
+				opacity: 0.3;
+				cursor: not-allowed;
+				pointer-events: none;
+			}
+
+			.baskets-container {
+				display: flex;
+				gap: 2rem;
+				margin: 2rem 0;
+				flex-wrap: wrap;
+			}
+
+			.basket {
+				flex: 1;
+				min-width: 250px;
+				background-color: #3c3c3c;
+				border-radius: 16px;
+				padding: 1.5rem;
+				border: 2px solid #5a5a5a;
+				transition: all 0.2s;
+			}
+
+			.basket.drag-over {
+				border-color: #9b59b6;
+				background-color: #4a4a4a;
+				transform: scale(1.02);
+			}
+
+			.basket-header {
+				font-size: 1.3rem;
+				font-weight: 600;
+				margin-bottom: 1rem;
+				text-align: center;
+				color: #ffffff;
+			}
+
+			.basket-items {
+				min-height: 200px;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				padding: 0.5rem;
+				background-color: #2f2f2f;
+				border-radius: 12px;
+			}
+
+			.basket-item {
+				background-color: #4f4f4f;
+				border: 1px solid #5a5a5a;
+				border-radius: 30px;
+				padding: 0.6rem 1rem;
+				font-size: 0.95rem;
+				text-align: center;
+				transition: all 0.2s;
+				cursor: grab;
+				margin-bottom: 0.25rem;
+			}
+
+			.basket-item:active {
+				cursor: grabbing;
+				opacity: 0.8;
+			}
+
+			.basket-item.dragging {
+				opacity: 0.5;
+				transform: scale(0.95);
+			}
+
+			.basket-item.correct {
+				background-color: #1e4a2e;
+				border-color: #2ecc71;
+			}
+
+			.basket-item.incorrect {
+				background-color: #4a1e1e;
+				border-color: #e74c3c;
+			}
+
+			.basket-item.locked {
+				cursor: default;
+				opacity: 1;
+				pointer-events: none;
+			}
+
+			.block-status-container {
+				margin-top: 1.5rem;
+			}
+
+			.block-status {
+				display: inline-block;
+				padding: 0.5rem 1.5rem;
+				background-color: #2f2f2f;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				font-size: 1rem;
+				color: #d0d0d0;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.8rem 2rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1.1rem;
+			}
+
+			.nav-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.nav-btn.prev::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-right: 0.5rem;
+			}
+
+			.nav-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			@media (max-width: 700px) {
+				.page-title {
+					font-size: 1.8rem;
+				}
+				.content-block {
+					padding: 1.8rem;
+				}
+				.content-title {
+					font-size: 1.8rem;
+				}
+				.tip-title {
+					font-size: 1.2rem;
+				}
+				.baskets-container {
+					flex-direction: column;
+				}
+				.bottom-nav {
+					flex-direction: column;
+				}
+				.nav-btn {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="threetest.html" class="home-button">Назад</a>
+
+			<div class="page-header">
+				<h1 class="page-title">Как защитить себя от фишинга</h1>
+				<div class="page-subtitle">6 простых правил безопасности</div>
+			</div>
+
+			<div class="content-block">
+				<div class="content-title">Содержание</div>
+
+				<div class="tips-list">
+					<div class="tip-item">
+						<div class="tip-number">Правило 1</div>
+						<div class="tip-title">
+							Внимательно проверяйте электронные письма
+						</div>
+						<div class="tip-content">
+							<p>
+								Получив любое письмо, не спешите отвечать или выполнять
+								инструкции из него: сначала обратите внимание на важные детали.
+								Что должно насторожить?
+							</p>
+							<ul>
+								<li>
+									<span class="highlight">Броская тема.</span> Крупные переводы,
+									денежные компенсации, взлом или блокировка учетной записи —
+									злоумышленники играют на чувствах жертвы.
+								</li>
+								<li>
+									<span class="highlight">Нагнетание обстановки.</span> Фразы
+									«срочно!» и «у вас осталось всего 3 часа», обилие
+									восклицательных знаков.
+								</li>
+								<li>
+									<span class="highlight"
+										>Ошибки, опечатки и странные символы.</span
+									>
+									«розыгрышь призов», замена букв на похожие латинские.
+								</li>
+								<li>
+									<span class="highlight">Странный адрес отправителя.</span>
+									Нагромождение букв и цифр или «левый» домен.
+								</li>
+								<li>
+									<span class="highlight">Ссылка в письме.</span> Наведите мышку
+									и проверьте адрес — часто меняют одну букву (sumsung.com,
+									qoogle.com).
+								</li>
+							</ul>
+							<p>
+								<span class="highlight"
+									>По возможности вообще не переходите по ссылкам из писем, если
+									вы их не запрашивали.</span
+								>
+							</p>
+						</div>
+					</div>
+
+					<div class="tip-item">
+						<div class="tip-number">Правило 2</div>
+						<div class="tip-title">
+							Не теряйте бдительность в мессенджерах и социальных сетях
+						</div>
+						<div class="tip-content">
+							<p>
+								Ссылки-приманки могут быть где угодно: в сообщениях, постах
+								друзей, комментариях, баннерах. Ресурсы с баннерами не могут
+								контролировать, куда вы перейдете.
+							</p>
+							<p>
+								<span class="highlight"
+									>Как и в случае с почтой, очень внимательно проверяйте все
+									ссылки, а лучше вообще не нажимайте на них.</span
+								>
+							</p>
+						</div>
+					</div>
+
+					<div class="tip-item">
+						<div class="tip-number">Правило 3</div>
+						<div class="tip-title">Перед вводом номера карты остановитесь!</div>
+						<div class="tip-content">
+							<p>Прежде чем вводить реквизиты карты:</p>
+							<ul>
+								<li>
+									Присмотритесь к адресной строке — нет ли опечаток, цифр вместо
+									букв, странных доменов.
+								</li>
+								<li>
+									Нажмите на замочек слева от адреса и проверьте информацию о
+									владельце сайта через SSL-сертификат.
+								</li>
+							</ul>
+							<p>
+								<span class="highlight"
+									>Заведите отдельную карту для онлайн-покупок с небольшим
+									лимитом.</span
+								>
+							</p>
+						</div>
+					</div>
+
+					<div class="tip-item">
+						<div class="tip-number">Правило 4</div>
+						<div class="tip-title">Используйте разные пароли</div>
+						<div class="tip-content">
+							<p>
+								Один пароль для всех аккаунтов — риск потерять всё. Используйте
+								<span class="highlight">менеджер паролей</span>:
+							</p>
+							<ul>
+								<li>Нужно запомнить только один мастер-пароль</li>
+								<li>Приложение само подставляет пароли на нужные сайты</li>
+								<li>
+									Если пароль не подставился — возможно, вы на фишинговом сайте
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="tip-item">
+						<div class="tip-number">Правило 5</div>
+						<div class="tip-title">Включите двухфакторную аутентификацию</div>
+						<div class="tip-content">
+							<p>
+								Даже если пароль украдут, без дополнительного кода войти не
+								смогут. Для особо важных аккаунтов используйте
+								<span class="highlight">аппаратный ключ</span> (YubiKey и т.п.).
+							</p>
+						</div>
+					</div>
+
+					<div class="tip-item">
+						<div class="tip-number">Правило 6</div>
+						<div class="tip-title">Используйте надежную защиту</div>
+						<div class="tip-content">
+							<p>
+								Антивирус сам проверит ссылки и предупредит об опасности,
+								заблокирует переход на вредоносные страницы.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="gray-divider"></div>
+
+				<div class="test-intro">
+					<p>
+						<span class="highlight"
+							>Чтобы защитить себя от фишинга, необходимо соблюдать простые
+							правила.</span
+						>
+					</p>
+					<p>Проверь, знаешь ли ты их.</p>
+				</div>
+
+				<div class="exercise-block">
+					<div class="exercise-title">
+						Распредели настоящие и фишинговые сайты по корзинам
+					</div>
+
+					<div class="sites-container" id="sitesContainer">
+						<div
+							class="site-card"
+							draggable="true"
+							data-url="http://applied.aple.com"
+							data-type="phishing"
+							id="site1"
+						>
+							http://applied.aple.com
+						</div>
+						<div
+							class="site-card"
+							draggable="true"
+							data-url="https://www.sberbank.ru/"
+							data-type="real"
+							id="site2"
+						>
+							https://www.sberbank.ru/
+						</div>
+						<div
+							class="site-card"
+							draggable="true"
+							data-url="http://whatsapp-com.ru"
+							data-type="phishing"
+							id="site3"
+						>
+							http://whatsapp-com.ru
+						</div>
+						<div
+							class="site-card"
+							draggable="true"
+							data-url="https://www.vk.com/"
+							data-type="real"
+							id="site4"
+						>
+							https://www.vk.com/
+						</div>
+						<div
+							class="site-card"
+							draggable="true"
+							data-url="https://www.minecraft.net/"
+							data-type="real"
+							id="site5"
+						>
+							https://www.minecraft.net/
+						</div>
+					</div>
+
+					<div class="baskets-container">
+						<div class="basket" id="realBasket" data-basket="real">
+							<div class="basket-header">Настоящий сайт</div>
+							<div class="basket-items" id="realBasketItems"></div>
+						</div>
+						<div class="basket" id="phishingBasket" data-basket="phishing">
+							<div class="basket-header">Фишинговый сайт</div>
+							<div class="basket-items" id="phishingBasketItems"></div>
+						</div>
+					</div>
+
+					<div class="block-status-container">
+						<div class="block-status" id="exerciseStatus">
+							Блок еще не пройден
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="threetest_2.html" class="nav-btn prev">Предыдущая страница</a>
+				<a href="threetest_4.html" class="nav-btn next">Следующая страница</a>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const sites = document.querySelectorAll('.site-card')
+				const realBasket = document.getElementById('realBasket')
+				const phishingBasket = document.getElementById('phishingBasket')
+				const realBasketItems = document.getElementById('realBasketItems')
+				const phishingBasketItems = document.getElementById(
+					'phishingBasketItems',
+				)
+				const exerciseStatus = document.getElementById('exerciseStatus')
+
+				let draggedItem = null
+
+				const correctReal = [
+					'https://www.sberbank.ru/',
+					'https://www.vk.com/',
+					'https://www.minecraft.net/',
+				]
+				const correctPhishing = [
+					'http://applied.aple.com',
+					'http://whatsapp-com.ru',
+				]
+
+				function isAllCorrect() {
+					const realItems = []
+					const phishingItems = []
+
+					document
+						.querySelectorAll('#realBasketItems .basket-item')
+						.forEach(item => {
+							realItems.push(item.textContent)
+						})
+
+					document
+						.querySelectorAll('#phishingBasketItems .basket-item')
+						.forEach(item => {
+							phishingItems.push(item.textContent)
+						})
+
+					if (realItems.length + phishingItems.length !== 5) return false
+
+					let allCorrect = true
+					realItems.forEach(url => {
+						if (!correctReal.includes(url)) allCorrect = false
+					})
+					phishingItems.forEach(url => {
+						if (!correctPhishing.includes(url)) allCorrect = false
+					})
+
+					return allCorrect
+				}
+
+				function lockCorrectAnswers() {
+					document
+						.querySelectorAll('#realBasketItems .basket-item')
+						.forEach(item => {
+							const url = item.textContent
+							if (correctReal.includes(url)) {
+								item.classList.add('locked')
+								item.setAttribute('draggable', 'false')
+							}
+						})
+
+					document
+						.querySelectorAll('#phishingBasketItems .basket-item')
+						.forEach(item => {
+							const url = item.textContent
+							if (correctPhishing.includes(url)) {
+								item.classList.add('locked')
+								item.setAttribute('draggable', 'false')
+							}
+						})
+				}
+
+				function getCurrentSites() {
+					const realItems = []
+					const phishingItems = []
+
+					document
+						.querySelectorAll('#realBasketItems .basket-item')
+						.forEach(item => {
+							realItems.push(item.textContent)
+						})
+
+					document
+						.querySelectorAll('#phishingBasketItems .basket-item')
+						.forEach(item => {
+							phishingItems.push(item.textContent)
+						})
+
+					return { realItems, phishingItems }
+				}
+
+				function updateStatus() {
+					const { realItems, phishingItems } = getCurrentSites()
+					const totalReal = realItems.length
+					const totalPhishing = phishingItems.length
+
+					if (totalReal === 0 && totalPhishing === 0) {
+						exerciseStatus.textContent = 'Блок еще не пройден'
+						return
+					}
+
+					if (totalReal + totalPhishing === 5) {
+						let allCorrect = true
+
+						realItems.forEach(url => {
+							if (!correctReal.includes(url)) allCorrect = false
+						})
+
+						phishingItems.forEach(url => {
+							if (!correctPhishing.includes(url)) allCorrect = false
+						})
+
+						if (allCorrect) {
+							exerciseStatus.textContent = 'Блок пройден верно'
+						} else {
+							exerciseStatus.textContent = 'Блок пройден с ошибками'
+						}
+					} else {
+						exerciseStatus.textContent = 'Блок в процессе прохождения'
+					}
+
+					lockCorrectAnswers()
+				}
+
+				function createBasketItem(url, type) {
+					const item = document.createElement('div')
+					item.className = 'basket-item'
+					if (type === 'real') {
+						item.classList.add(
+							correctReal.includes(url) ? 'correct' : 'incorrect',
+						)
+					} else {
+						item.classList.add(
+							correctPhishing.includes(url) ? 'correct' : 'incorrect',
+						)
+					}
+					item.textContent = url
+					item.setAttribute('draggable', 'true')
+					item.setAttribute('data-url', url)
+					item.setAttribute('data-type', type)
+
+					item.addEventListener('dragstart', function (e) {
+						const url = this.textContent
+						const type = this.dataset.type
+
+						const isCorrectReal = type === 'real' && correctReal.includes(url)
+						const isCorrectPhishing =
+							type === 'phishing' && correctPhishing.includes(url)
+
+						if (
+							(type === 'real' &&
+								correctReal.includes(url) &&
+								this.parentElement.id === 'realBasketItems') ||
+							(type === 'phishing' &&
+								correctPhishing.includes(url) &&
+								this.parentElement.id === 'phishingBasketItems')
+						) {
+							e.preventDefault()
+							return
+						}
+
+						draggedItem = this
+						this.classList.add('dragging')
+						e.dataTransfer.setData('text/plain', url)
+						e.dataTransfer.setData('type', type)
+						e.dataTransfer.setData('source', 'basket')
+						e.dataTransfer.effectAllowed = 'move'
+					})
+
+					item.addEventListener('dragend', function (e) {
+						this.classList.remove('dragging')
+						draggedItem = null
+					})
+
+					return item
+				}
+
+				sites.forEach(site => {
+					site.addEventListener('dragstart', function (e) {
+						draggedItem = this
+						this.classList.add('dragging')
+						e.dataTransfer.setData('text/plain', this.dataset.url)
+						e.dataTransfer.setData('type', this.dataset.type)
+						e.dataTransfer.setData('source', 'top')
+						e.dataTransfer.effectAllowed = 'move'
+					})
+
+					site.addEventListener('dragend', function (e) {
+						this.classList.remove('dragging')
+						draggedItem = null
+					})
+				})
+				;[realBasket, phishingBasket].forEach(basket => {
+					basket.addEventListener('dragover', function (e) {
+						e.preventDefault()
+						this.classList.add('drag-over')
+						e.dataTransfer.dropEffect = 'move'
+					})
+
+					basket.addEventListener('dragleave', function (e) {
+						this.classList.remove('drag-over')
+					})
+
+					basket.addEventListener('drop', function (e) {
+						e.preventDefault()
+						this.classList.remove('drag-over')
+
+						if (!draggedItem) return
+
+						const url = e.dataTransfer.getData('text/plain')
+						const type = e.dataTransfer.getData('type')
+						const source = e.dataTransfer.getData('source')
+						const basketType = this.dataset.basket
+
+						if (source === 'basket') {
+							const isCorrectReal =
+								type === 'real' &&
+								correctReal.includes(url) &&
+								draggedItem.parentElement.id === 'realBasketItems'
+							const isCorrectPhishing =
+								type === 'phishing' &&
+								correctPhishing.includes(url) &&
+								draggedItem.parentElement.id === 'phishingBasketItems'
+
+							if (isCorrectReal || isCorrectPhishing) {
+								return
+							}
+						}
+
+						draggedItem.remove()
+
+						const targetBasket =
+							basketType === 'real' ? realBasketItems : phishingBasketItems
+						const newItem = createBasketItem(url, basketType)
+						targetBasket.appendChild(newItem)
+
+						updateStatus()
+					})
+				})
+
+				updateStatus()
+			})
+		</script>
+	</body>
+</html>

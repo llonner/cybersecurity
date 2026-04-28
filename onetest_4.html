@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Памятка: Что делать при кибербуллинге</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.6;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.back-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.back-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.back-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.page-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.page-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.page-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.content-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.content-title {
+				font-size: 2rem;
+				font-weight: 700;
+				color: #9b59b6;
+				margin-bottom: 2rem;
+				text-align: center;
+			}
+
+			.gray-divider {
+				height: 2px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					#9b59b6,
+					#9b59b6,
+					transparent
+				);
+				margin: 2rem 0;
+				opacity: 0.5;
+			}
+
+			.memory-heading {
+				font-size: 1.5rem;
+				font-weight: 500;
+				color: #d0d0d0;
+				margin-bottom: 2rem;
+			}
+
+			.tips-list {
+				list-style: none;
+				margin: 2rem 0;
+			}
+
+			.tips-list li {
+				margin-bottom: 1.2rem;
+				padding-left: 2rem;
+				position: relative;
+				font-size: 1.2rem;
+				line-height: 1.6;
+			}
+
+			.tips-list li::before {
+				content: '•';
+				position: absolute;
+				left: 0;
+				color: #9b59b6;
+				font-size: 1.5rem;
+				font-weight: bold;
+			}
+
+			.phone-number {
+				font-size: 1.2rem;
+				color: #9b59b6;
+				text-align: center;
+				margin: 2rem 0 0 0;
+				padding: 0.5rem;
+				background-color: transparent;
+				border: none;
+				letter-spacing: 1px;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.lesson-nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.8rem 2rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1.1rem;
+			}
+
+			.lesson-nav-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.lesson-nav-btn.prev::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-right: 0.5rem;
+			}
+
+			.lesson-nav-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			@media (max-width: 700px) {
+				.page-title {
+					font-size: 1.8rem;
+				}
+				.content-block {
+					padding: 1.8rem;
+				}
+				.content-title {
+					font-size: 1.8rem;
+				}
+				.memory-heading {
+					font-size: 1.3rem;
+				}
+				.tips-list li {
+					font-size: 1.1rem;
+				}
+				.bottom-nav {
+					flex-direction: column;
+				}
+				.lesson-nav-btn {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.page-title {
+					font-size: 1.6rem;
+				}
+				.content-block {
+					padding: 1.5rem;
+				}
+				.content-title {
+					font-size: 1.6rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="onetest.html" class="back-button">Назад</a>
+
+			<div class="page-header">
+				<h1 class="page-title">Памятка</h1>
+				<div class="page-subtitle">
+					Что делать, если ты стал жертвой кибербуллинга
+				</div>
+			</div>
+
+			<div class="content-block">
+				<div class="content-title">Содержание</div>
+
+				<div class="gray-divider"></div>
+
+				<div class="memory-heading">
+					Что делать, если ты стал жертвой кибербуллинга?
+				</div>
+
+				<ul class="tips-list">
+					<li>
+						Успокойся и не отвечай на оскорбления, иначе ты можешь разжечь
+						конфликт.
+					</li>
+					<li>
+						Добавь агрессора в чёрный список или установи запрет на отправку
+						сообщений.
+					</li>
+					<li>
+						Если ты свидетель кибербуллинга, выступи против действий
+						преследователя, поддержи жертву.
+					</li>
+					<li>Сообщи взрослым о факте агрессивного поведения в сети.</li>
+					<li>
+						Позвони по телефону доверия для детей, подростков и их родителей
+						<strong>8-800-2000-122</strong> (бесплатно и анонимно).
+					</li>
+				</ul>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="onetest_3.html" class="lesson-nav-btn prev"
+					>Предыдущая страница</a
+				>
+				<a href="onetest_5.html" class="lesson-nav-btn next"
+					>Следующая страница</a
+				>
+			</div>
+		</div>
+	</body>
+</html>

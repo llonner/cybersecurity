@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Основные схемы рыбаков-мошенников</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.6;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.home-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.home-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.home-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.page-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.page-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.page-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.theory-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.theory-text {
+				font-size: 1.2rem;
+				color: #e0e0e0;
+				margin-bottom: 2rem;
+			}
+
+			.theory-text p {
+				margin-bottom: 1.2rem;
+			}
+
+			.slider-container {
+				position: relative;
+				width: 100%;
+				margin: 2rem 0 1rem 0;
+				overflow: hidden;
+				border-radius: 16px;
+			}
+
+			.slider-track {
+				display: flex;
+				transition: transform 0.3s ease;
+			}
+
+			.slider-slide {
+				flex: 0 0 100%;
+				padding: 0 0.5rem;
+				display: flex;
+				justify-content: center;
+			}
+
+			.image-placeholder {
+				width: 100%;
+				max-width: 635px;
+				height: auto;
+				aspect-ratio: 635 / 555;
+				background-color: #2f2f2f;
+				border-radius: 16px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #9b59b6;
+				font-size: 1.2rem;
+				font-weight: 500;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+
+			.image-placeholder img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.slider-dots {
+				display: flex;
+				justify-content: center;
+				gap: 0.8rem;
+				margin-top: 1.5rem;
+				margin-bottom: 1rem;
+			}
+
+			.slider-dot {
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				border: 2px solid #9b59b6;
+				background-color: transparent;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+
+			.slider-dot.active {
+				background-color: #9b59b6;
+				transform: scale(1.2);
+			}
+
+			.slider-dot:hover {
+				background-color: #9b59b6;
+				opacity: 0.5;
+			}
+
+			.gray-divider {
+				height: 2px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					#9b59b6,
+					#9b59b6,
+					transparent
+				);
+				margin: 2rem 0;
+				opacity: 0.5;
+			}
+
+			.test-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.test-block:last-child {
+				margin-bottom: 0;
+			}
+
+			.test-header {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.question-text {
+				font-size: 1.2rem;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+			}
+
+			.options-group {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.option-item {
+				display: flex;
+				align-items: flex-start;
+				gap: 1rem;
+				background-color: #2f2f2f;
+				padding: 1.2rem 1.5rem;
+				border-radius: 16px;
+				border: 2px solid #5a5a5a;
+				cursor: pointer;
+				transition: none;
+			}
+
+			.option-item.disabled {
+				pointer-events: none;
+				opacity: 0.9;
+			}
+
+			.option-item.correct-selected {
+				background-color: #1e4a2e;
+				border-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected {
+				background-color: #4a1e1e;
+				border-color: #e74c3c;
+			}
+
+			.option-item input[type='checkbox'] {
+				appearance: none;
+				-webkit-appearance: none;
+				width: 1.3rem;
+				height: 1.3rem;
+				border: 2px solid #888;
+				border-radius: 4px;
+				background-color: #2f2f2f;
+				cursor: pointer;
+				position: relative;
+				transition: all 0.2s;
+				flex-shrink: 0;
+				margin-top: 0.2rem;
+				pointer-events: none;
+			}
+
+			.option-item input[type='checkbox']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+			}
+
+			.option-item input[type='checkbox']:checked::after {
+				content: '✓';
+				color: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 0.9rem;
+				font-weight: bold;
+			}
+
+			.option-item.correct-selected input[type='checkbox'] {
+				border-color: #2ecc71;
+				background-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected input[type='checkbox'] {
+				border-color: #e74c3c;
+				background-color: #e74c3c;
+			}
+
+			.option-text {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+				flex: 1;
+			}
+
+			.option-badge {
+				font-size: 0.85rem;
+				font-weight: 600;
+				padding: 0.2rem 1rem;
+				border-radius: 40px;
+				white-space: nowrap;
+			}
+
+			.option-item.correct-selected .option-badge {
+				background-color: #2ecc71;
+				color: #000;
+			}
+
+			.option-item.incorrect-selected .option-badge {
+				background-color: #e74c3c;
+				color: #fff;
+			}
+
+			.block-status-container {
+				margin-top: 1.5rem;
+			}
+
+			.block-status {
+				display: inline-block;
+				padding: 0.5rem 1.5rem;
+				background-color: #2f2f2f;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				font-size: 1rem;
+				color: #d0d0d0;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.8rem 2rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1.1rem;
+			}
+
+			.nav-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.nav-btn.prev::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-right: 0.5rem;
+			}
+
+			.nav-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			@media (max-width: 700px) {
+				.page-title {
+					font-size: 1.8rem;
+				}
+				.theory-block {
+					padding: 1.8rem;
+				}
+				.test-block {
+					padding: 1.8rem;
+				}
+				.test-header {
+					font-size: 1.3rem;
+				}
+				.option-item {
+					padding: 1rem;
+				}
+				.bottom-nav {
+					flex-direction: column;
+				}
+				.nav-btn {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.page-title {
+					font-size: 1.6rem;
+				}
+				.theory-block {
+					padding: 1.5rem;
+				}
+				.test-block {
+					padding: 1.5rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="threetest.html" class="home-button">Назад</a>
+
+			<div class="page-header">
+				<h1 class="page-title">Основные схемы рыбаков-мошенников</h1>
+				<div class="page-subtitle">
+					Как распознать сообщения от злоумышленников
+				</div>
+			</div>
+
+			<div class="theory-block">
+				<div class="theory-text">
+					<p>
+						Часто, чтобы напугать и не дать время на размышление, злоумышленники
+						отправляют различные сообщения
+					</p>
+				</div>
+
+				<div class="slider-container">
+					<div class="slider-track" id="sliderTrack">
+						<div class="slider-slide">
+							<div class="image-placeholder">
+								<span><img src="img/unnamed.jpeg" /></span>
+							</div>
+						</div>
+						<div class="slider-slide">
+							<div class="image-placeholder">
+								<span><img src="img/unnamed (1).jpeg" /></span>
+							</div>
+						</div>
+						<div class="slider-slide">
+							<div class="image-placeholder">
+								<span><img src="img/photo_2026-03-17_22-05-36.jpg" /></span>
+							</div>
+						</div>
+						<div class="slider-slide">
+							<div class="image-placeholder">
+								<span><img src="img/photo_2026-03-17_22-05-41.jpg" /></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="slider-dots" id="sliderDots">
+					<span class="slider-dot active" data-index="0"></span>
+					<span class="slider-dot" data-index="1"></span>
+					<span class="slider-dot" data-index="2"></span>
+					<span class="slider-dot" data-index="3"></span>
+				</div>
+
+				<div class="gray-divider"></div>
+
+				<div class="test-block" id="testBlock">
+					<div class="test-header">
+						Выбери сообщения, которые отправили мошенники, чтобы украсть личные
+						данные пользователя
+					</div>
+					<div class="question-text">Выберите все подходящие ответы:</div>
+
+					<div class="options-group" id="checkboxGroup">
+						<label class="option-item" data-correct="false" data-index="0">
+							<input type="checkbox" />
+							<span class="option-text"
+								>Привет! Перезвони Маше, пожалуйста!</span
+							>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="1">
+							<input type="checkbox" />
+							<span class="option-text"
+								>Привет! Я потерял телефон. Положи деньги на этот номер, я тебе
+								перезвоню и всё расскажу.</span
+							>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="2">
+							<input type="checkbox" />
+							<span class="option-text"
+								>Привет! Посмотри, это ты на фото? foto.ru/854</span
+							>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="3">
+							<input type="checkbox" />
+							<span class="option-text"
+								>По вашему банковскому счету прямо сейчас проводится
+								сомнительный перевод. Для отмены транзакции отправьте код 6754
+								ответным сообщением.</span
+							>
+							<span class="option-badge"></span>
+						</label>
+					</div>
+
+					<div class="block-status-container">
+						<div class="block-status" id="testStatus">Блок еще не пройден</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="threetest_1.html" class="nav-btn prev">Предыдущая страница</a>
+				<a href="threetest_3.html" class="nav-btn next">Следующая страница</a>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const sliderTrack = document.getElementById('sliderTrack')
+				const slides = document.querySelectorAll('.slider-slide')
+				const dots = document.querySelectorAll('.slider-dot')
+
+				let currentIndex = 0
+				const totalSlides = slides.length
+
+				function updateSlider() {
+					sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`
+
+					dots.forEach((dot, index) => {
+						if (index === currentIndex) {
+							dot.classList.add('active')
+						} else {
+							dot.classList.remove('active')
+						}
+					})
+				}
+
+				dots.forEach((dot, index) => {
+					dot.addEventListener('click', () => {
+						currentIndex = index
+						updateSlider()
+					})
+				})
+
+				const checkItems = document.querySelectorAll(
+					'#checkboxGroup .option-item',
+				)
+				const testStatus = document.getElementById('testStatus')
+
+				let testState = {
+					status: 'not_started',
+					hasStarted: false,
+					correctIndices: [1, 2, 3],
+					selectedIndices: [],
+					isBlocked: false,
+				}
+
+				function updateTestStatus() {
+					if (!testState.hasStarted) {
+						testState.status = 'not_started'
+						testStatus.textContent = 'Блок еще не пройден'
+						return
+					}
+
+					let allCorrectSelected = true
+					testState.correctIndices.forEach(idx => {
+						if (!testState.selectedIndices.includes(idx)) {
+							allCorrectSelected = false
+						}
+					})
+
+					if (allCorrectSelected) {
+						let hasErrors = false
+						testState.selectedIndices.forEach(idx => {
+							if (!testState.correctIndices.includes(idx)) {
+								hasErrors = true
+							}
+						})
+
+						if (hasErrors) {
+							testState.status = 'completed_with_errors'
+							testStatus.textContent = 'Блок пройден с ошибками'
+						} else {
+							testState.status = 'completed_success'
+							testStatus.textContent = 'Блок пройден верно'
+						}
+
+						blockAllOptions()
+					} else {
+						testState.status = 'in_progress'
+						testStatus.textContent = 'Блок в процессе прохождения'
+					}
+				}
+
+				function blockAllOptions() {
+					checkItems.forEach(item => {
+						item.classList.add('disabled')
+					})
+					testState.isBlocked = true
+				}
+
+				function handleTestClick(clickedItem) {
+					if (testState.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+					const isCorrect = clickedItem.dataset.correct === 'true'
+					const checkbox = clickedItem.querySelector('input[type="checkbox"]')
+					const badge = clickedItem.querySelector('.option-badge')
+
+					if (checkbox.checked) {
+						return
+					}
+
+					checkbox.checked = true
+					testState.hasStarted = true
+
+					if (!testState.selectedIndices.includes(clickedIndex)) {
+						testState.selectedIndices.push(clickedIndex)
+					}
+
+					if (isCorrect) {
+						clickedItem.classList.add('correct-selected')
+						clickedItem.classList.remove('incorrect-selected')
+						badge.textContent = 'Правильный ответ'
+					} else {
+						clickedItem.classList.add('incorrect-selected')
+						clickedItem.classList.remove('correct-selected')
+						badge.textContent = 'Неправильный ответ'
+					}
+
+					updateTestStatus()
+				}
+
+				checkItems.forEach(item => {
+					item.addEventListener('click', function (e) {
+						e.preventDefault()
+						handleTestClick(this)
+					})
+				})
+
+				updateTestStatus()
+			})
+		</script>
+	</body>
+</html>

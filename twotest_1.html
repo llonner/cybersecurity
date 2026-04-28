@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Что такое вредоносная программа? | Вопрос 1</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.6;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.home-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.home-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.home-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.page-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.page-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.page-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.test-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.test-header {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.question-text {
+				font-size: 1.2rem;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+			}
+
+			.options-group {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.option-item {
+				display: flex;
+				align-items: flex-start;
+				gap: 1rem;
+				background-color: #2f2f2f;
+				padding: 1.2rem 1.5rem;
+				border-radius: 16px;
+				border: 2px solid #5a5a5a;
+				cursor: pointer;
+				transition: none;
+			}
+
+			.option-item.disabled {
+				pointer-events: none;
+				opacity: 0.9;
+			}
+
+			.option-item.correct-selected {
+				background-color: #1e4a2e;
+				border-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected {
+				background-color: #4a1e1e;
+				border-color: #e74c3c;
+			}
+
+			.option-item input[type='radio'],
+			.option-item input[type='checkbox'] {
+				appearance: none;
+				-webkit-appearance: none;
+				width: 1.3rem;
+				height: 1.3rem;
+				border: 2px solid #888;
+				border-radius: 50%;
+				background-color: #2f2f2f;
+				cursor: pointer;
+				position: relative;
+				transition: all 0.2s;
+				flex-shrink: 0;
+				margin-top: 0.2rem;
+				pointer-events: none;
+			}
+
+			.option-item input[type='checkbox'] {
+				border-radius: 4px;
+			}
+
+			.option-item input[type='radio']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+				box-shadow: inset 0 0 0 3px #2f2f2f;
+			}
+
+			.option-item input[type='checkbox']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+			}
+
+			.option-item input[type='checkbox']:checked::after {
+				content: '✓';
+				color: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 0.9rem;
+				font-weight: bold;
+			}
+
+			.option-item.correct-selected input[type='radio'],
+			.option-item.correct-selected input[type='checkbox'] {
+				border-color: #2ecc71;
+				background-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected input[type='radio'],
+			.option-item.incorrect-selected input[type='checkbox'] {
+				border-color: #e74c3c;
+				background-color: #e74c3c;
+			}
+
+			.option-text,
+			.checkbox-text {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+				flex: 1;
+			}
+
+			.option-badge {
+				font-size: 0.85rem;
+				font-weight: 600;
+				padding: 0.2rem 1rem;
+				border-radius: 40px;
+				white-space: nowrap;
+			}
+
+			.option-item.correct-selected .option-badge {
+				background-color: #2ecc71;
+				color: #000;
+			}
+
+			.option-item.incorrect-selected .option-badge {
+				background-color: #e74c3c;
+				color: #fff;
+			}
+
+			.block-status-container {
+				margin-top: 1.5rem;
+			}
+
+			.block-status {
+				display: inline-block;
+				padding: 0.5rem 1.5rem;
+				background-color: #2f2f2f;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				font-size: 1rem;
+				color: #d0d0d0;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: flex-end;
+				margin-top: 2rem;
+			}
+
+			.nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.8rem 2.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1.1rem;
+			}
+
+			.nav-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.nav-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			@media (max-width: 700px) {
+				.page-title {
+					font-size: 1.8rem;
+				}
+				.test-block {
+					padding: 1.8rem;
+				}
+				.test-header {
+					font-size: 1.3rem;
+				}
+				.option-item {
+					padding: 1rem;
+				}
+				.bottom-nav {
+					justify-content: center;
+				}
+				.nav-btn {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.page-title {
+					font-size: 1.6rem;
+				}
+				.test-block {
+					padding: 1.5rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="twotest.html" class="home-button">Назад</a>
+
+			<div class="page-header">
+				<h1 class="page-title">Что такое вредоносная программа?</h1>
+				<div class="page-subtitle">Разбираемся в основах кибербезопасности</div>
+			</div>
+
+			<div class="test-block" id="block1">
+				<div class="test-header">Выбери верное утверждение:</div>
+
+				<div class="options-group" id="radioGroup">
+					<label class="option-item" data-correct="true" data-index="0">
+						<input type="radio" name="radioQuestion" />
+						<span class="option-text"
+							>Вредоносной программой может быть любой тип программного
+							обеспечения, предназначенного для нанесения вреда или
+							мошеннических действий</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="false" data-index="1">
+						<input type="radio" name="radioQuestion" />
+						<span class="option-text"
+							>Вредоносной программой может быть только нелицензионное
+							программное обеспечение</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="false" data-index="2">
+						<input type="radio" name="radioQuestion" />
+						<span class="option-text"
+							>Вредоносной программой может быть любой тип программного
+							обеспечения, предназначенного для использования на любом
+							устройстве</span
+						>
+						<span class="option-badge"></span>
+					</label>
+				</div>
+
+				<div class="block-status-container">
+					<div class="block-status" id="block1Status">Блок еще не пройден</div>
+				</div>
+			</div>
+
+			<div class="test-block" id="block2">
+				<div class="test-header">
+					Выбери способы, с помощью которых может произойти атака на устройства
+					пользователей
+				</div>
+				<div
+					class="question-text"
+					style="
+						font-size: 1rem;
+						color: #b8b8b8;
+						margin-top: -0.5rem;
+						margin-bottom: 1.5rem;
+					"
+				>
+					Выберите все подходящие ответы:
+				</div>
+
+				<div class="options-group" id="checkboxGroup">
+					<label class="option-item" data-correct="true" data-index="0">
+						<input type="checkbox" />
+						<span class="option-text"
+							>Письмо со ссылкой для получения денежного приза</span
+						>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="false" data-index="1">
+						<input type="checkbox" />
+						<span class="option-text">Обновление программного обеспечения</span>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="true" data-index="2">
+						<input type="checkbox" />
+						<span class="option-text">USB-диски</span>
+						<span class="option-badge"></span>
+					</label>
+					<label class="option-item" data-correct="true" data-index="3">
+						<input type="checkbox" />
+						<span class="option-text">Вложения, зараженные вирусом</span>
+						<span class="option-badge"></span>
+					</label>
+				</div>
+
+				<div class="block-status-container">
+					<div class="block-status" id="block2Status">Блок еще не пройден</div>
+				</div>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="twotest_2.html" class="nav-btn next">Следующая страница</a>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const radioItems = document.querySelectorAll('#radioGroup .option-item')
+				const block1Status = document.getElementById('block1Status')
+
+				let block1State = {
+					status: 'not_started',
+					hasStarted: false,
+					selectedIndices: [],
+					correctIndex: 0,
+					isBlocked: false,
+				}
+
+				function updateBlock1Status() {
+					if (!block1State.hasStarted) {
+						block1State.status = 'not_started'
+						block1Status.textContent = 'Блок еще не пройден'
+					} else if (block1State.status === 'in_progress') {
+						block1Status.textContent = 'Блок в процессе прохождения'
+					} else if (block1State.status === 'completed_with_errors') {
+						block1Status.textContent = 'Блок пройден с ошибками'
+					} else if (block1State.status === 'completed_success') {
+						block1Status.textContent = 'Блок пройден верно'
+					}
+				}
+
+				function block1AllOptions() {
+					radioItems.forEach(item => {
+						item.classList.add('disabled')
+					})
+					block1State.isBlocked = true
+				}
+
+				function handleBlock1Click(clickedItem) {
+					if (block1State.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+
+					const radio = clickedItem.querySelector('input[type="radio"]')
+					radio.checked = true
+
+					if (!block1State.selectedIndices.includes(clickedIndex)) {
+						block1State.selectedIndices.push(clickedIndex)
+					}
+
+					block1State.hasStarted = true
+
+					radioItems.forEach(item => {
+						const itemIndex = parseInt(item.dataset.index)
+						const itemBadge = item.querySelector('.option-badge')
+
+						if (block1State.selectedIndices.includes(itemIndex)) {
+							if (item.dataset.correct === 'true') {
+								item.classList.add('correct-selected')
+								item.classList.remove('incorrect-selected')
+								itemBadge.textContent = 'Правильный ответ'
+							} else {
+								item.classList.add('incorrect-selected')
+								item.classList.remove('correct-selected')
+								itemBadge.textContent = 'Неправильный ответ'
+							}
+						}
+					})
+
+					if (block1State.selectedIndices.includes(block1State.correctIndex)) {
+						if (
+							block1State.selectedIndices.length === 1 &&
+							block1State.selectedIndices[0] === block1State.correctIndex
+						) {
+							block1State.status = 'completed_success'
+						} else {
+							block1State.status = 'completed_with_errors'
+						}
+
+						block1AllOptions()
+					} else {
+						block1State.status = 'in_progress'
+					}
+
+					updateBlock1Status()
+				}
+
+				radioItems.forEach(item => {
+					item.addEventListener('click', function (e) {
+						e.preventDefault()
+						handleBlock1Click(this)
+					})
+				})
+
+				const checkItems = document.querySelectorAll(
+					'#checkboxGroup .option-item',
+				)
+				const block2Status = document.getElementById('block2Status')
+
+				let block2State = {
+					status: 'not_started',
+					hasStarted: false,
+					correctIndices: [0, 2, 3],
+					selectedIndices: [],
+					isBlocked: false,
+				}
+
+				function updateBlock2Status() {
+					if (!block2State.hasStarted) {
+						block2State.status = 'not_started'
+						block2Status.textContent = 'Блок еще не пройден'
+						return
+					}
+
+					let allCorrectSelected = true
+					block2State.correctIndices.forEach(idx => {
+						if (!block2State.selectedIndices.includes(idx)) {
+							allCorrectSelected = false
+						}
+					})
+
+					if (allCorrectSelected) {
+						let hasErrors = false
+						block2State.selectedIndices.forEach(idx => {
+							if (!block2State.correctIndices.includes(idx)) {
+								hasErrors = true
+							}
+						})
+
+						if (hasErrors) {
+							block2State.status = 'completed_with_errors'
+							block2Status.textContent = 'Блок пройден с ошибками'
+						} else {
+							block2State.status = 'completed_success'
+							block2Status.textContent = 'Блок пройден верно'
+						}
+
+						block2AllOptions()
+					} else {
+						block2State.status = 'in_progress'
+						block2Status.textContent = 'Блок в процессе прохождения'
+					}
+				}
+
+				function block2AllOptions() {
+					checkItems.forEach(item => {
+						item.classList.add('disabled')
+					})
+					block2State.isBlocked = true
+				}
+
+				function handleBlock2Click(clickedItem) {
+					if (block2State.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+					const isCorrect = clickedItem.dataset.correct === 'true'
+					const checkbox = clickedItem.querySelector('input[type="checkbox"]')
+					const badge = clickedItem.querySelector('.option-badge')
+
+					if (checkbox.checked) {
+						return
+					}
+
+					checkbox.checked = true
+					block2State.hasStarted = true
+
+					if (!block2State.selectedIndices.includes(clickedIndex)) {
+						block2State.selectedIndices.push(clickedIndex)
+					}
+
+					if (isCorrect) {
+						clickedItem.classList.add('correct-selected')
+						clickedItem.classList.remove('incorrect-selected')
+						badge.textContent = 'Правильный ответ'
+					} else {
+						clickedItem.classList.add('incorrect-selected')
+						clickedItem.classList.remove('correct-selected')
+						badge.textContent = 'Неправильный ответ'
+					}
+
+					updateBlock2Status()
+				}
+
+				checkItems.forEach(item => {
+					item.addEventListener('click', function (e) {
+						e.preventDefault()
+						handleBlock2Click(this)
+					})
+				})
+
+				updateBlock1Status()
+				updateBlock2Status()
+			})
+		</script>
+	</body>
+</html>

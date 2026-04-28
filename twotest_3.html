@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Резервное копирование данных</title>
+		<link rel="icon" href="img/icon.jpg" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Tektur:wght@400..900&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: #2b2b2b;
+				font-family: 'Playpen Sans', cursive;
+				color: #e0e0e0;
+				line-height: 1.6;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				width: 92%;
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem 0 3rem 0;
+			}
+
+			.home-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.6rem 1.5rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1rem;
+				margin-bottom: 2rem;
+				align-self: flex-start;
+			}
+
+			.home-button:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+				transform: translateX(-3px);
+			}
+
+			.home-button::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			.page-header {
+				margin-bottom: 2.5rem;
+			}
+
+			.page-title {
+				font-size: 2.2rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 0.5rem;
+				border-left: 6px solid #a0a0a0;
+				padding-left: 1.2rem;
+			}
+
+			.page-subtitle {
+				font-size: 1.1rem;
+				color: #b8b8b8;
+				margin-left: 1.8rem;
+			}
+
+			.content-block {
+				background-color: #3c3c3c;
+				border-radius: 28px;
+				padding: 2.5rem;
+				margin-bottom: 2rem;
+				border: 1px solid #5a5a5a;
+				box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+			}
+
+			.content-title {
+				font-size: 2rem;
+				font-weight: 700;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				text-align: center;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.section-title {
+				font-size: 1.8rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin: 2rem 0 1.5rem 0;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.subsection-title {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #9b59b6;
+				margin: 2rem 0 1rem 0;
+			}
+
+			.text-block {
+				font-size: 1.2rem;
+				color: #e0e0e0;
+				margin-bottom: 2rem;
+			}
+
+			.text-block p {
+				margin-bottom: 1.2rem;
+			}
+
+			.highlight {
+				color: #9b59b6;
+				font-weight: 600;
+			}
+
+			.rule-list {
+				list-style: none;
+				margin: 1.5rem 0;
+			}
+
+			.rule-list li {
+				margin-bottom: 0.8rem;
+				padding-left: 2rem;
+				position: relative;
+				font-size: 1.2rem;
+			}
+
+			.rule-list li::before {
+				content: '•';
+				position: absolute;
+				left: 0;
+				color: #9b59b6;
+				font-size: 1.5rem;
+				font-weight: bold;
+			}
+
+			.important-note {
+				background-color: #2f2f2f;
+				border-left: 4px solid #9b59b6;
+				padding: 1.5rem;
+				border-radius: 16px;
+				margin: 2rem 0;
+				font-size: 1.2rem;
+				font-style: italic;
+			}
+
+			.test-block {
+				background-color: #3c3c3c;
+				border-radius: 24px;
+				padding: 2rem;
+				margin-bottom: 2.5rem;
+				border: 1px solid #5a5a5a;
+			}
+
+			.test-header {
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 2px solid #4f4f4f;
+			}
+
+			.question-text {
+				font-size: 1.2rem;
+				color: #ffffff;
+				margin-bottom: 1.5rem;
+			}
+
+			.options-group {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.option-item {
+				display: flex;
+				align-items: flex-start;
+				gap: 1rem;
+				background-color: #2f2f2f;
+				padding: 1.2rem 1.5rem;
+				border-radius: 16px;
+				border: 2px solid #5a5a5a;
+				cursor: pointer;
+				transition: none;
+			}
+
+			.option-item.disabled {
+				pointer-events: none;
+				opacity: 0.9;
+			}
+
+			.option-item.correct-selected {
+				background-color: #1e4a2e;
+				border-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected {
+				background-color: #4a1e1e;
+				border-color: #e74c3c;
+			}
+
+			.option-item.saved-selected {
+				background-color: #b8860b;
+				border-color: #ffd700;
+			}
+
+			.option-item input[type='radio'],
+			.option-item input[type='checkbox'] {
+				appearance: none;
+				-webkit-appearance: none;
+				width: 1.3rem;
+				height: 1.3rem;
+				border: 2px solid #888;
+				border-radius: 50%;
+				background-color: #2f2f2f;
+				cursor: pointer;
+				position: relative;
+				transition: all 0.2s;
+				flex-shrink: 0;
+				margin-top: 0.2rem;
+				pointer-events: none;
+			}
+
+			.option-item input[type='checkbox'] {
+				border-radius: 4px;
+			}
+
+			.option-item input[type='radio']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+				box-shadow: inset 0 0 0 3px #2f2f2f;
+			}
+
+			.option-item input[type='checkbox']:checked {
+				border-color: #9b59b6;
+				background-color: #9b59b6;
+			}
+
+			.option-item input[type='checkbox']:checked::after {
+				content: '✓';
+				color: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 0.9rem;
+				font-weight: bold;
+			}
+
+			.option-item.correct-selected input[type='radio'],
+			.option-item.correct-selected input[type='checkbox'] {
+				border-color: #2ecc71;
+				background-color: #2ecc71;
+			}
+
+			.option-item.incorrect-selected input[type='radio'],
+			.option-item.incorrect-selected input[type='checkbox'] {
+				border-color: #e74c3c;
+				background-color: #e74c3c;
+			}
+
+			.option-item.saved-selected input[type='radio'] {
+				border-color: #ffd700;
+				background-color: #ffd700;
+			}
+
+			.option-text {
+				font-size: 1.1rem;
+				color: #e0e0e0;
+				flex: 1;
+			}
+
+			.option-badge {
+				font-size: 0.85rem;
+				font-weight: 600;
+				padding: 0.2rem 1rem;
+				border-radius: 40px;
+				white-space: nowrap;
+			}
+
+			.option-item.correct-selected .option-badge {
+				background-color: #2ecc71;
+				color: #000;
+			}
+
+			.option-item.incorrect-selected .option-badge {
+				background-color: #e74c3c;
+				color: #fff;
+			}
+
+			.option-item.saved-selected .option-badge {
+				background-color: #ffd700;
+				color: #000;
+			}
+
+			.block-status-container {
+				margin-top: 1.5rem;
+			}
+
+			.block-status {
+				display: inline-block;
+				padding: 0.5rem 1.5rem;
+				background-color: #2f2f2f;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				font-size: 1rem;
+				color: #d0d0d0;
+			}
+
+			.bottom-nav {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: #3c3c3c;
+				color: #e0e0e0;
+				text-decoration: none;
+				font-weight: 500;
+				padding: 0.8rem 2rem;
+				border-radius: 40px;
+				border: 1px solid #5a5a5a;
+				transition: all 0.2s ease;
+				font-size: 1.1rem;
+			}
+
+			.nav-btn:hover {
+				background-color: #4f4f4f;
+				border-color: #9b59b6;
+				color: white;
+			}
+
+			.nav-btn.prev::before {
+				content: '←';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-right: 0.5rem;
+			}
+
+			.nav-btn.next::after {
+				content: '→';
+				font-size: 1.2rem;
+				font-weight: bold;
+				margin-left: 0.5rem;
+			}
+
+			@media (max-width: 700px) {
+				.page-title {
+					font-size: 1.8rem;
+				}
+				.content-block {
+					padding: 1.8rem;
+				}
+				.content-title {
+					font-size: 1.8rem;
+				}
+				.section-title {
+					font-size: 1.5rem;
+				}
+				.text-block {
+					font-size: 1.1rem;
+				}
+				.option-item {
+					padding: 1rem;
+				}
+				.bottom-nav {
+					flex-direction: column;
+				}
+				.nav-btn {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.page-title {
+					font-size: 1.6rem;
+				}
+				.content-block {
+					padding: 1.5rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<a href="twotest.html" class="home-button">Назад</a>
+
+			<div class="page-header">
+				<h1 class="page-title">Резервное копирование данных</h1>
+				<div class="page-subtitle">Как защитить свои данные?</div>
+			</div>
+
+			<div class="content-block">
+				<div class="content-title">Содержание</div>
+
+				<div class="text-block">
+					<p>
+						Чтобы не подвергать опасности заражения своё устройство, лучше
+						установить
+						<span class="highlight">антивирусное программное обеспечение</span>.
+						Это позволяет создать защиту от наиболее распространенных и
+						разрушительных типов вредоносных программ.
+					</p>
+
+					<p>
+						Но что делать, если ваше устройство все же было заражено? Вирусы
+						могут повредить, зашифровать или удалить файлы на вашем устройстве.
+					</p>
+
+					<p>
+						Чтобы не потерять важные данные или фотографии, которые хранятся
+						только на одном устройстве, необходимо использовать
+						<span class="highlight">резервное копирование</span> на другой
+						носитель.
+					</p>
+				</div>
+
+				<div class="section-title">Причины потери данных:</div>
+
+				<ul class="rule-list">
+					<li>вредоносные программы и действия злоумышленников</li>
+					<li>программные сбои</li>
+					<li>аппаратные сбои - поломка компонентов устройств</li>
+					<li>
+						собственная невнимательность и забывчивость: «нечаянно удалил», «не
+						туда нажал», «забыл куда положил»
+					</li>
+				</ul>
+
+				<div class="section-title">Правило «3-2-1»:</div>
+
+				<ul class="rule-list">
+					<li>Иметь 3 копии данных</li>
+					<li>Хранить копии на 2 разных носителях</li>
+					<li>Хранить 1 резервную копию в облаке</li>
+				</ul>
+
+				<div class="important-note">
+					Так что запомните: если у вас важные данные находятся только на одном
+					устройстве, то у вас нет важных данных!
+				</div>
+
+				<div class="test-block" id="block1">
+					<div class="test-header">
+						Используешь ли ты резервное копирование данных?
+					</div>
+
+					<div class="options-group" id="radioGroup1">
+						<label class="option-item" data-index="0" data-value="yes">
+							<input type="radio" name="backupQuestion" />
+							<span class="option-text">ДА</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-index="1" data-value="no">
+							<input type="radio" name="backupQuestion" />
+							<span class="option-text">НЕТ</span>
+							<span class="option-badge"></span>
+						</label>
+					</div>
+
+					<div class="block-status-container">
+						<div class="block-status" id="block1Status">
+							Блок еще не пройден
+						</div>
+					</div>
+				</div>
+
+				<div class="test-block" id="block2">
+					<div class="test-header">Какое хранилище является облачным?</div>
+					<div class="question-text">Выберите все подходящие ответы:</div>
+
+					<div class="options-group" id="checkboxGroup1">
+						<label class="option-item" data-correct="false" data-index="0">
+							<input type="checkbox" />
+							<span class="option-text">Внешний жесткий диск</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="1">
+							<input type="checkbox" />
+							<span class="option-text">Яндекс Диск</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="false" data-index="2">
+							<input type="checkbox" />
+							<span class="option-text">USB-накопитель (флешка)</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="3">
+							<input type="checkbox" />
+							<span class="option-text">Социальные сети</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="4">
+							<input type="checkbox" />
+							<span class="option-text">Dropbox</span>
+							<span class="option-badge"></span>
+						</label>
+					</div>
+
+					<div class="block-status-container">
+						<div class="block-status" id="block2Status">
+							Блок еще не пройден
+						</div>
+					</div>
+				</div>
+
+				<div class="test-block" id="block3">
+					<div class="test-header">
+						Выбери варианты, где используется правило резервного копирования
+						3-2-1
+					</div>
+					<div class="question-text">Выберите все подходящие ответы:</div>
+
+					<div class="options-group" id="checkboxGroup2">
+						<label class="option-item" data-correct="false" data-index="0">
+							<input type="checkbox" />
+							<span class="option-text">Компьютер, ноутбук, смартфон</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="1">
+							<input type="checkbox" />
+							<span class="option-text">Компьютер, смартфон, Яндекс.Диск</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="2">
+							<input type="checkbox" />
+							<span class="option-text">Ноутбук, USB-диск, Dropbox</span>
+							<span class="option-badge"></span>
+						</label>
+						<label class="option-item" data-correct="true" data-index="3">
+							<input type="checkbox" />
+							<span class="option-text">Ноутбук, смартфон, Google Диск</span>
+							<span class="option-badge"></span>
+						</label>
+					</div>
+
+					<div class="block-status-container">
+						<div class="block-status" id="block3Status">
+							Блок еще не пройден
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom-nav">
+				<a href="twotest_2.html" class="nav-btn prev">Предыдущая страница</a>
+				<a href="twotest_4.html" class="nav-btn next">Следующая страница</a>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const radioItems1 = document.querySelectorAll(
+					'#radioGroup1 .option-item',
+				)
+				const block1Status = document.getElementById('block1Status')
+
+				let block1State = {
+					status: 'not_started',
+					selectedIndex: null,
+					isBlocked: false,
+				}
+
+				function updateBlock1Status() {
+					if (block1State.selectedIndex === null) {
+						block1Status.textContent = 'Блок еще не пройден'
+					} else {
+						block1Status.textContent = 'Ответ сохранен'
+					}
+				}
+
+				function block1AllOptions() {
+					radioItems1.forEach(item => {
+						item.classList.add('disabled')
+					})
+					block1State.isBlocked = true
+				}
+
+				function handleBlock1Click(clickedItem) {
+					if (block1State.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+
+					const radio = clickedItem.querySelector('input[type="radio"]')
+					radio.checked = true
+
+					if (block1State.selectedIndex !== null) {
+						const prevItem = radioItems1[block1State.selectedIndex]
+						prevItem.classList.remove('saved-selected')
+						const prevBadge = prevItem.querySelector('.option-badge')
+						prevBadge.textContent = ''
+					}
+
+					clickedItem.classList.add('saved-selected')
+					const badge = clickedItem.querySelector('.option-badge')
+					badge.textContent = 'Ответ сохранен'
+
+					block1State.selectedIndex = clickedIndex
+
+					block1AllOptions()
+
+					updateBlock1Status()
+				}
+
+				radioItems1.forEach(item => {
+					item.addEventListener('click', function (e) {
+						e.preventDefault()
+						handleBlock1Click(this)
+					})
+				})
+
+				const checkItems1 = document.querySelectorAll(
+					'#checkboxGroup1 .option-item',
+				)
+				const block2Status = document.getElementById('block2Status')
+
+				let block2State = {
+					status: 'not_started',
+					hasStarted: false,
+					correctIndices: [1, 3, 4],
+					selectedIndices: [],
+					isBlocked: false,
+				}
+
+				function updateBlock2Status() {
+					if (!block2State.hasStarted) {
+						block2State.status = 'not_started'
+						block2Status.textContent = 'Блок еще не пройден'
+						return
+					}
+
+					let allCorrectSelected = true
+					block2State.correctIndices.forEach(idx => {
+						if (!block2State.selectedIndices.includes(idx)) {
+							allCorrectSelected = false
+						}
+					})
+
+					if (allCorrectSelected) {
+						let hasErrors = false
+						block2State.selectedIndices.forEach(idx => {
+							if (!block2State.correctIndices.includes(idx)) {
+								hasErrors = true
+							}
+						})
+
+						if (hasErrors) {
+							block2State.status = 'completed_with_errors'
+							block2Status.textContent = 'Блок пройден с ошибками'
+						} else {
+							block2State.status = 'completed_success'
+							block2Status.textContent = 'Блок пройден верно'
+						}
+
+						block2AllOptions()
+					} else {
+						block2State.status = 'in_progress'
+						block2Status.textContent = 'Блок в процессе прохождения'
+					}
+				}
+
+				function block2AllOptions() {
+					checkItems1.forEach(item => {
+						item.classList.add('disabled')
+					})
+					block2State.isBlocked = true
+				}
+
+				function handleBlock2Click(clickedItem) {
+					if (block2State.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+					const isCorrect = clickedItem.dataset.correct === 'true'
+					const checkbox = clickedItem.querySelector('input[type="checkbox"]')
+					const badge = clickedItem.querySelector('.option-badge')
+
+					if (checkbox.checked) {
+						return
+					}
+
+					checkbox.checked = true
+					block2State.hasStarted = true
+
+					if (!block2State.selectedIndices.includes(clickedIndex)) {
+						block2State.selectedIndices.push(clickedIndex)
+					}
+
+					if (isCorrect) {
+						clickedItem.classList.add('correct-selected')
+						clickedItem.classList.remove('incorrect-selected')
+						badge.textContent = 'Правильный ответ'
+					} else {
+						clickedItem.classList.add('incorrect-selected')
+						clickedItem.classList.remove('correct-selected')
+						badge.textContent = 'Неправильный ответ'
+					}
+
+					updateBlock2Status()
+				}
+
+				checkItems1.forEach(item => {
+					item.addEventListener('click', function (e) {
+						e.preventDefault()
+						handleBlock2Click(this)
+					})
+				})
+
+				const checkItems2 = document.querySelectorAll(
+					'#checkboxGroup2 .option-item',
+				)
+				const block3Status = document.getElementById('block3Status')
+
+				let block3State = {
+					status: 'not_started',
+					hasStarted: false,
+					correctIndices: [1, 2, 3],
+					selectedIndices: [],
+					isBlocked: false,
+				}
+
+				function updateBlock3Status() {
+					if (!block3State.hasStarted) {
+						block3State.status = 'not_started'
+						block3Status.textContent = 'Блок еще не пройден'
+						return
+					}
+
+					let allCorrectSelected = true
+					block3State.correctIndices.forEach(idx => {
+						if (!block3State.selectedIndices.includes(idx)) {
+							allCorrectSelected = false
+						}
+					})
+
+					if (allCorrectSelected) {
+						let hasErrors = false
+						block3State.selectedIndices.forEach(idx => {
+							if (!block3State.correctIndices.includes(idx)) {
+								hasErrors = true
+							}
+						})
+
+						if (hasErrors) {
+							block3State.status = 'completed_with_errors'
+							block3Status.textContent = 'Блок пройден с ошибками'
+						} else {
+							block3State.status = 'completed_success'
+							block3Status.textContent = 'Блок пройден верно'
+						}
+
+						block3AllOptions()
+					} else {
+						block3State.status = 'in_progress'
+						block3Status.textContent = 'Блок в процессе прохождения'
+					}
+				}
+
+				function block3AllOptions() {
+					checkItems2.forEach(item => {
+						item.classList.add('disabled')
+					})
+					block3State.isBlocked = true
+				}
+
+				function handleBlock3Click(clickedItem) {
+					if (block3State.isBlocked) return
+
+					const clickedIndex = parseInt(clickedItem.dataset.index)
+					const isCorrect = clickedItem.dataset.correct === 'true'
+					const checkbox = clickedItem.querySelector('input[type="checkbox"]')
+					const badge = clickedItem.querySelector('.option-badge')
+
+					if (checkbox.checked) {
+						return
+					}
+
+					checkbox.checked = true
+					block3State.hasStarted = true
+
+					if (!block3State.selectedIndices.includes(clickedIndex)) {
+						block3State.selectedIndices.push(clickedIndex)
+					}
+
+					if (isCorrect) {
+						clickedItem.classList.add('correct-selected')
+						clickedItem.classList.remove('incorrect-selected')
+						badge.textContent = 'Правильный ответ'
+					} else {
+						clickedItem.classList.add('incorrect-selected')
+						clickedItem.classList.remove('correct-selected')
+						badge.textContent = 'Неправильный ответ'
+					}
+
+					updateBlock3Status()
+				}
+
+				checkItems2.forEach(item => {
+					item.addEventListener('click', function (e) {
+						e.preventDefault()
+						handleBlock3Click(this)
+					})
+				})
+
+				updateBlock1Status()
+				updateBlock2Status()
+				updateBlock3Status()
+			})
+		</script>
+	</body>
+</html>

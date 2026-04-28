@@ -1,0 +1,409 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #2b2b2b;
+	color: #e0e0e0;
+	line-height: 1.5;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	font-family: 'Playpen Sans', cursive;
+}
+
+/* главный контейнер */
+.wrapper {
+	max-width: 1600px; /* чуть шире, чтобы крупные блоки смотрелись */
+	width: 92%;
+	margin: 0 auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ========== ШАПКА ========== */
+.header {
+	padding: 1rem 0 1rem 0;
+	border-bottom: 1px solid #4a4a4a;
+	margin-bottom: 1.1rem;
+	display: flex;
+	justify-content: center;
+}
+
+.header__title-link {
+	text-decoration: none;
+	display: inline-block;
+	transition: opacity 0.2s ease;
+}
+
+.header__title-link:hover {
+	opacity: 0.8;
+}
+
+.header__title {
+	text-align: center;
+	font-size: 3.2rem; /* немного крупнее */
+	font-weight: 500;
+	letter-spacing: 2px;
+	color: #f0f0f0;
+	word-break: break-word;
+}
+
+/* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+/* заголовок "Уроки" полностью отсутствует */
+.lessons-grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2.5rem; /* увеличенный gap */
+	margin: 2.5rem 0 3.5rem 0;
+}
+
+/* карточка теста (бывшего урока) — теперь крупнее */
+.lesson-card {
+	flex: 1 1 380px; /* базовый размер увеличен */
+	min-width: 340px; /* минимальная ширина выросла */
+	max-width: 500px; /* максимальная ширина — почти полкарточки */
+	background-color: #3c3c3c;
+	border-radius: 32px; /* чуть скруглённее */
+	padding: 2.5rem 2rem 2.5rem 2rem; /* щедрые внутренние отступы */
+	box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.8);
+	display: flex;
+	flex-direction: column;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+	border: 1px solid #626262;
+}
+
+.lesson-card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 25px 35px -10px black;
+	border-color: #9b59b6;
+}
+
+/* номер теста */
+.lesson-number {
+	display: inline-block;
+	background-color: #4f4f4f;
+	color: #ddd;
+	font-weight: 700;
+	font-size: 1.3rem; /* крупнее */
+	padding: 0.4rem 1.5rem;
+	border-radius: 50px;
+	align-self: flex-start;
+	margin-bottom: 1.5rem;
+	letter-spacing: 0.8px;
+	border: 1px solid #777;
+}
+
+/* название теста */
+.lesson-title {
+	font-size: 2rem; /* значительно крупнее */
+	font-weight: 700;
+	line-height: 1.2;
+	margin-bottom: 1.2rem;
+	color: #ffffff;
+	border-left: 5px solid #b0b0b0;
+	padding-left: 1.2rem;
+}
+
+/* описание */
+.lesson-desc {
+	font-size: 1.15rem; /* увеличено */
+	color: #cacaca;
+	margin-bottom: 2.2rem;
+	flex-grow: 1;
+}
+
+/* нижняя часть карточки: кнопка + время */
+.lesson-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: auto;
+	border-top: 1px dashed #686868;
+	padding-top: 1.5rem;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.btn-lesson {
+	display: inline-block;
+	background-color: #5f5f5f;
+	color: white;
+	text-decoration: none;
+	font-weight: 700;
+	padding: 0.9rem 2.8rem; /* крупная кнопка */
+	border-radius: 60px;
+	font-size: 1.3rem; /* текст кнопки крупнее */
+	border: 1px solid #9f9f9f;
+	transition:
+		background 0.15s,
+		border 0.15s;
+	letter-spacing: 0.8px;
+}
+
+.btn-lesson:hover {
+	background-color: #7a7a7a;
+	border-color: #c0c0c0;
+}
+
+.lesson-duration {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: #2f2f2f;
+	padding: 0.6rem 1.5rem;
+	border-radius: 60px;
+	font-weight: 600;
+	color: #d0d0d0;
+	border: 1px solid #7a7a7a;
+	font-size: 1.15rem; /* увеличен */
+}
+
+.lesson-duration::before {
+	content: '⏱️';
+	font-size: 1.3rem;
+	filter: grayscale(20%);
+}
+
+/* ========== ПОДВАЛ ========== */
+.footer {
+	background-color: #000000; /* прям черный */
+	color: #dddddd;
+	padding: 2.5rem 1rem;
+	margin-top: 2rem;
+	text-align: center;
+	border-top: 3px solid #1f1f1f;
+	width: 100vw;
+	margin-left: calc(-50vw + 50%);
+}
+
+.footer__text {
+	font-size: 16px; /* крупнее */
+	font-weight: 400;
+	letter-spacing: 4px;
+	color: #f5f5f5;
+	text-transform: uppercase;
+	opacity: 0.9;
+}
+
+.main-content {
+	flex: 1;
+}
+
+/* адаптация */
+@media (max-width: 1000px) {
+	.wrapper {
+		width: 95%;
+	}
+	.lesson-card {
+		flex: 1 1 420px; /* на средних экранах карточки могут быть шире */
+		max-width: 600px;
+	}
+	.test-title {
+		font-size: 1.8rem;
+	}
+}
+
+@media (max-width: 700px) {
+	.header__title {
+		font-size: 2.5rem;
+	}
+	.lesson-title {
+		font-size: 2rem;
+	}
+	.lesson-footer {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.btn-lesson {
+		text-align: center;
+	}
+	.lesson-duration {
+		justify-content: center;
+	}
+	.questions-row {
+		flex-direction: column;
+	}
+	.question-card {
+		width: 100%;
+	}
+}
+
+@media (max-width: 480px) {
+	.lesson-card {
+		padding: 1.8rem 1.2rem;
+		min-width: 280px;
+	}
+	.lesson-title {
+		font-size: 1.8rem;
+	}
+	.test-title {
+		font-size: 1.6rem;
+	}
+	.card-btn {
+		width: 100%;
+		text-align: center;
+	}
+	.back-button {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+/* =============================== 1 тест ============================= */
+.wrapper-onetest {
+	max-width: 1400px;
+	width: 92%;
+	margin: 0 auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ========== ЗАГОЛОВОК ТЕСТА ========== */
+.test-header {
+	margin-bottom: 2rem;
+}
+
+.test-title {
+	font-size: 2.2rem;
+	font-weight: 600;
+	color: #ffffff;
+	margin-bottom: 0.5rem;
+	border-left: 6px solid #a0a0a0;
+	padding-left: 1.2rem;
+}
+
+.test-subtitle {
+	font-size: 1.1rem;
+	color: #b8b8b8;
+	margin-left: 1.8rem;
+}
+
+/* ========== СЕТКА ВОПРОСОВ ========== */
+.questions-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 1.8rem;
+	margin: 2rem 0 3rem 0;
+}
+
+.questions-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	width: 100%;
+}
+
+/* карточка-вопрос */
+.question-card {
+	flex: 1 1 300px;
+	min-width: 280px;
+	background-color: #3c3c3c;
+	border-radius: 24px;
+	padding: 1.8rem 1.5rem;
+	box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.7);
+	border: 1px solid #5a5a5a;
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.15s ease;
+}
+
+.question-card:hover {
+	transform: translateY(-4px);
+	border-color: #9b59b6;
+}
+
+.question-number {
+	display: inline-block;
+	background-color: #4f4f4f;
+	color: #ddd;
+	font-weight: 600;
+	font-size: 1rem;
+	padding: 0.3rem 1.2rem;
+	border-radius: 40px;
+	align-self: flex-start;
+	margin-bottom: 1rem;
+	border: 1px solid #6a6a6a;
+}
+
+.question-text {
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: #ffffff;
+	margin-bottom: 1rem;
+	line-height: 1.4;
+	flex-grow: 1;
+}
+
+/* ========== КНОПКА В КАРТОЧКЕ ========== */
+.card-btn {
+	display: inline-block;
+	background-color: #9b59b6;
+	color: white;
+	text-decoration: none;
+	font-weight: 600;
+	padding: 0.7rem 1.5rem;
+	border-radius: 40px;
+	font-size: 1rem;
+	border: none;
+	box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+	transition:
+		background-color 0.2s,
+		transform 0.1s;
+	text-align: center;
+	align-self: flex-start;
+	margin-top: 0.5rem;
+	border: 1px solid #b07cc6;
+	cursor: pointer;
+}
+
+.card-btn:hover {
+	background-color: #8e44ad;
+	box-shadow: 0 6px 14px rgba(155, 89, 182, 0.5);
+	transform: scale(1.02);
+}
+
+.card-btn:active {
+	transform: scale(0.98);
+}
+
+/* ========== КНОПКА НАЗАД ========== */
+.nav-section {
+	margin-bottom: 1.5rem;
+}
+
+.back-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: #3c3c3c;
+	color: #e0e0e0;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.6rem 1.5rem;
+	border-radius: 40px;
+	border: 1px solid #5a5a5a;
+	transition: all 0.2s ease;
+	font-size: 1rem;
+}
+
+.back-button:hover {
+	background-color: #4f4f4f;
+	border-color: #9b59b6;
+	color: white;
+	transform: translateX(-3px);
+}
+
+.back-button::before {
+	content: '←';
+	font-size: 1.2rem;
+	font-weight: bold;
+}
